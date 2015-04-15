@@ -9,4 +9,5 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % Test withSources() withJavadoc()
 )
 
+fork in Test := true
 
