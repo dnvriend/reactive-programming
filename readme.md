@@ -5,6 +5,7 @@ The examples for each week and some try-outs..
 I get my information from a whole lot of resources, I will share it here:
 
 # Documentation
+- The [Scala Source Code on GitHub](https://github.com/scala/scala)
 - The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
 - What does [invariant](http://en.wikipedia.org/wiki/Invariant_%28mathematics%29) mean?
 
