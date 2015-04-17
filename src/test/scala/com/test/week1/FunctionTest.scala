@@ -3,6 +3,58 @@ package com.test.week1
 import com.test.TestSpec
 
 class FunctionTest extends TestSpec {
+
+  "Scala function literal" should "be of the following types" in {
+    // all three are the same
+    val f0_1: Function0[Unit] = new Function0[Unit] {
+      override def apply(): Unit = Unit
+    }
+    val f0_2: Function0[Unit] = () => Unit
+    val f0_3: Unit = () => Unit
+
+    // all three are the same
+    val f1_1: Function1[Unit, Unit] = new Function1[Unit, Unit] {
+      override def apply(x: Unit): Unit = Unit
+    }
+    val f1_2: Function1[Unit, Unit] = (x: Unit) => Unit
+    val f1_3: (Unit => Unit) = (x: Unit) => Unit
+
+    // all three are the same
+    val f2_1: Function1[Int, Unit] = new Function1[Int, Unit] {
+      override def apply(x: Int): Unit = Unit
+    }
+    val f2_2: Function1[Int, Unit] = (x: Int) => Unit
+    val f2_3: (Int => Unit) = (x: Int) => Unit
+
+    // all three are the same
+    val f3_1: Function[Int, Int] = new Function1[Int, Int] {
+      override def apply(x: Int): Int = x
+    }
+    val f3_2: Function1[Int, Int] = (x: Int) => x
+    val f3_3: Int => Int = (x: Int) => x
+
+    // all three are the same
+    val f4_1: Function2[Int, Int, Unit] = new Function2[Int, Int, Unit] {
+      override def apply(x: Int, y: Int): Unit = Unit
+    }
+    val f4_2: Function2[Int, Int, Unit] = (x: Int, y: Int) => Unit
+    val f4_3: (Int, Int) => Unit = (x: Int, y: Int) => Unit
+
+    // all three are the same
+    val f5_1: Function2[Int, Int, Int] = new Function2[Int, Int, Int] {
+      override def apply(x: Int, y: Int): Int = x + y
+    }
+    val f5_2: Function2[Int, Int, Int] = (x: Int, y: Int) => x + y
+    val f5_3: (Int, Int) => Int = (x: Int, y: Int) => x + y
+
+    // all three are the same
+    val f6_1: Function3[Int, Int, Int, Unit] = new Function3[Int, Int, Int, Unit] {
+      override def apply(x: Int, y: Int, z: Int): Unit = Unit
+    }
+    val f6_2: Function3[Int, Int, Int, Unit] = (x: Int, y: Int, z: Int) => Unit
+    val f6_3: (Int, Int, Int) => Unit = (x: Int, y: Int, z: Int) => Unit
+  }
+
   "A function" should "be applied" in {
     // the literal String => String is a Function1[String, String]
     // this type can only be applied, because it is a Function,
