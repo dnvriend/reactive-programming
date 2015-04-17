@@ -20,3 +20,8 @@ I get my information from a whole lot of resources, I will share it here:
 
 # Example source code
 - [Vladimir Kostyukov's Scalacaster](https://github.com/vkostyukov/scalacaster): algorithms and data structures in Scala
+
+# Test frameworks
+- [ScalaTest](http://www.scalatest.org/)
+- [ScalaCheck](http://scalacheck.org/)
+- [Generator-driven property checks](http://www.scalatest.org/user_guide/generator_driven_property_checks)
