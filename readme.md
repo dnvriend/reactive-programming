@@ -2,6 +2,36 @@
 The examples for each week and some try-outs..
 
 # Week 1
+## Hint 1
+For testing, you want to insert two values into the heap, for example with:
+
+```scala
+forAll { (x: Int, y: Int) => 
+}
+```
+
+When you add the values into the heap and search for the minimum (findMin), it would be handy
+to know whether x or y is the smallest, the following will help:
+
+```scala
+scala> def order = scala.math.Ordering.Int
+order: math.Ordering.Int.type
+
+scala> order.min(2,1)
+res0: Int = 1
+```
+
+The heap has the method `ord` that does the same.
+
+## Hint 2
+Did you notice the following:
+
+* 
+
+
+# Week 2
+
+
 I get my information from a whole lot of resources, I will share it here:
 
 # Documentation
