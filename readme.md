@@ -70,18 +70,23 @@ res3: Boolean = true
 
 # Week 2
 
-
-I get my information from a whole lot of resources, I will share it here:
-
 # Documentation
+
+## General
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
 - The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
+
+## Week 1
 - What does [invariant](http://en.wikipedia.org/wiki/Invariant_%28mathematics%29) mean?
 - [The Neophyte's Guide to Scala Part 12 - Type Classes](http://danielwestheide.com/blog/2013/02/06/the-neophytes-guide-to-scala-part-12-type-classes.html)
 - [Learn yourself Haskell - Functors, Applicative Functors and Monoids](http://learnyouahaskell.com/functors-applicative-functors-and-monoids)
 - [Learn yourself Haskell - A fistful of Monads](http://learnyouahaskell.com/a-fistful-of-monads)
 
+# Week 2
+- [What is the difference between view, stream and iterator?](http://docs.scala-lang.org/tutorials/FAQ/stream-view-iterator.html)
+
 # Video resources
+## Week 1
 - What is a [Priority Queue](https://www.youtube.com/watch?v=QJ_7S1p0Kj8)?
 - What is a [Binary Heap](https://www.youtube.com/watch?v=cEY_JAm7L_o)?
 - Algorithms with Attitude - [Introduction to Binary Heaps](https://www.youtube.com/watch?v=WCm3TqScBM8)
@@ -90,6 +95,8 @@ I get my information from a whole lot of resources, I will share it here:
 - Algorithms with Attitude - [HeapSort](https://www.youtube.com/watch?v=onlhnHpGgC4)
 - Algorithms with Attitude - [Lineair Time BuildHeap](https://www.youtube.com/watch?v=BlMQVkakxtE)
 - [Typeclasses in Scala with Dan Rosen](https://www.youtube.com/watch?v=sVMES4RZF-8) 
+
+## Week 2
 
 # Example source code
 - [Vladimir Kostyukov's Scalacaster](https://github.com/vkostyukov/scalacaster): algorithms and data structures in Scala
