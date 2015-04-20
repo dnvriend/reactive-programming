@@ -124,20 +124,20 @@ class FunctionTest extends TestSpec {
     // which is clearly not the case as they are methods! But why does the
     // compiler not complain?
 
-    def addThenSquare(x: Int, f: Int => Int, g: Int => Int): Int = g(f(x))
-    addThenSquare(2, sqr, add) shouldBe 12
+    def squareThenAdd(x: Int, f: Int => Int, g: Int => Int): Int = g(f(x))
+    squareThenAdd(2, sqr, add) shouldBe 12
   }
 
   it should "be expanded to functions using the Bridge Pattern" in {
     def add(x: Int) = x + x + x
     def sqr(x: Int) = x * x
 
-    // andThenSquare only accepts objects of type Function1[Int, Int], so
+    // squareThenAdd only accepts objects of type Function1[Int, Int], so
     // what is going on is that the methods are automatically coerced by the
     // compiler to the type Function1[Int, Int]. To show how this process works,
     // let's manually transform the method to a function:
 
-    def addThenSquare(x: Int, f: Int => Int, g: Int => Int): Int = g(f(x))
+    def squareThenAdd(x: Int, f: Int => Int, g: Int => Int): Int = g(f(x))
 
     // create a new object of type Function[Int, Int] and
     // call the sqr method
@@ -151,13 +151,13 @@ class FunctionTest extends TestSpec {
       override def apply(x: Int): Int = add(x)
     }
 
-    // the addThenSquare can be called with the two functions. We now
+    // the squareThenAdd method can be called with the two functions. We now
     // have manually done what the compiler does for us automatically, so
-    // please don't do this in your projects!
+    // please don't do this in your projects! This process is called 'ETA Expansion'.
     //
     // There is more to ETA expansion than this, but now the story is
     // kind-of complete for basic Functions anyway.
-    addThenSquare(2, f, g) shouldBe 12
+    squareThenAdd(2, f, g) shouldBe 12
   }
 
   //
