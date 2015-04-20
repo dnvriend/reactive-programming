@@ -1,15 +1,38 @@
 package com.test.week2
 
-class FunctionsAndStateTest {
-  // the function iterate has three parameters,
-  // * n, that is of type Int
-  // * f: A function from Int => Int
-  // * x: that is of type Int
-  def iterate(n: Int, f: Int => Int, x: Int): Int =
-    if(n == 0) x else iterate(n-1, f, f(x))
+import akka.event.Logging
+import com.test.TestSpec
 
-  // the function square, that is of type Int => Int
-  // I know, it's a method, but methods can be converted
-  // to Functions by the Scala compiler
-  def square(x: Int) = x * x
+class FunctionsAndStateTest extends TestSpec {
+   val log = Logging(system, this.getClass)
+   class BankAccount {
+     private var balance = 0
+     def deposit(amount: Int): Unit = {
+       balance = if (amount > 0) balance + amount else balance
+       log.info("Depositing: {}, balance is: {}", amount, balance)
+     }
+
+     def withdraw(amount: Int): Int =
+      if(0 < amount && amount <= balance) {
+        balance -= amount
+        log.info("Withdrawn: {}, balance is: {}", amount, balance)
+        balance
+      } else {
+        log.error("Withdrawn: {}, overdrawn!, balance would be: {}", amount, balance - amount)
+        throw new Error("insufficient funds")
+      }
+   }
+
+  "BankAccount" should "be able to be overdrawn" in {
+    // account is a stateful object, because the effect of the withdraw method
+    // depends on the history of the object. The results differ based upon the
+    // value of the balance variable.
+    val acct = new BankAccount
+    acct.deposit(50)
+    acct.withdraw(20) shouldBe 30
+    acct.withdraw(20) shouldBe 10
+    intercept[Error] {
+      acct.withdraw(15)
+    }
+  }
 }
