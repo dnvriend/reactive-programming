@@ -42,7 +42,16 @@ class MonadTest extends TestSpec {
    * or (the right side of the '=='), first apply x to f (which gives a monad), flatMap g, and
    * last m flatMap the evaluated result, thus, it should not matter where the parenthesis
    * are placed. The result must be the same, the sequence of evaluation should not matter
-   *
+   */
+
+  "Rule 1: Associativity: the sequence of evaluation does not matter" should "be true" in {
+    val x = 2
+    val f: Int => Option[Int] = (x: Int) => Option(x * 2)
+    val g: Int => Option[Int] = (x: Int) => Option(x * 3)
+    Option(x).flatMap(f).flatMap(g) shouldBe Option(x).flatMap(x => f(x).flatMap(g))
+  }
+
+  /**
    * 2. Left unit
    * unit(x) flatMap f == f(x)
    *
@@ -53,10 +62,15 @@ class MonadTest extends TestSpec {
    *
    * For example:
    * assume the function we will use is:
-   * val f: Int => Option[Int] = (x: Int) => Option(x * 2)
-   * val x = 1
-   * (Option(x) flatMap f) == f(x)
-   *
+   */
+
+   "Rule 2: Left Unit" should "be true" in {
+     val x = 2
+     val f: Int => Option[Int] = (x: Int) => Option(x * 2)
+     (Option(x) flatMap f) shouldBe f(x)
+   }
+
+  /**
    * 3. Right unit
    * m flatMap unit == m
    *
@@ -66,9 +80,14 @@ class MonadTest extends TestSpec {
    * For example, Option(1).flatMap(Option(1)) == Option(1)
    *
    * For example:
-   * val x = 1
-   * Option(x).flatMap(x => Option(x)) == Option(x)
-   *
-   * all are true, Option is a Monad
+   */
+
+   "Rule 3: Right Unit" should "be true" in {
+     val x = 1
+     Option(x).flatMap(x => Option(x)) shouldBe Option(x)
+   }
+
+  /**
+   * Because all three rules are true, the Option is a Monad
    */
 }
