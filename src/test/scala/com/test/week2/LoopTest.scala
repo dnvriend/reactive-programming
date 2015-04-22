@@ -43,21 +43,70 @@ class LoopTest extends TestSpec {
     i shouldBe 10
   }
 
-  "REPEAT UNTIL" should "be implemented using scala" in {
+  "REPEAT UNTIL" should "be implemented using named class" in {
     class Repeater(command: => Unit) {
-      def rep(condition: => Boolean): Unit = {
+      def UNTIL(condition: => Boolean): Unit = {
         command
-        if(condition) () else rep(condition)
+        if(condition) () else UNTIL(condition)
       }
-      def UNTIL(condition: => Boolean) = rep(condition)
     }
 
     def REPEAT(command: => Unit) = new Repeater(command)
     var i = 0
     REPEAT {
       i += 1
-    } UNTIL { i == 10}
+    } UNTIL (i == 10)
+    
     i shouldBe 10
+  }
+
+  it should "be implemented using AnyRef type" in {
+    def REPEAT(command: => Unit) = new AnyRef { 
+      def UNTIL(condition: => Boolean): Unit = { 
+        command
+        if (condition) () else UNTIL(condition) 
+      }
+    }
+
+    var i = 0
+     REPEAT {
+        i += 1
+     } UNTIL (i == 10)
+
+     i shouldBe 10
+  }
+
+  it should "be implemented as an anonymous class" in {
+    def REPEAT(command: => Unit) = new {
+     def UNTIL(condition: => Boolean): Unit = { 
+        command
+        if (condition) () else UNTIL(condition) 
+      }
+    }
+
+    var i = 0
+     REPEAT {
+        i += 1
+     } UNTIL (i == 10)
+
+     i shouldBe 10
+  }
+
+  it should "be implemented using Eta expansion" in {
+     def REPEAT(command: => Unit)(condition: () => Boolean): Unit = {
+      command 
+      if(condition()) () else REPEAT(command)(condition)
+    }
+
+     def UNTIL(condition: => Boolean): () => Boolean = () => condition
+
+     // extra braces due to currying
+     var i = 0
+     REPEAT {
+        i += 1
+     } (UNTIL (i == 10))
+
+     i shouldBe 10
   }
 
   "Scala" should "support the do-while loop" in {
