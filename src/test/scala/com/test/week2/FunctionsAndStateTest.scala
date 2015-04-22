@@ -1,6 +1,7 @@
 package com.test.week2
 
 import com.test.TestSpec
+import com.test.week2.state.BankAccount
 
 class FunctionsAndStateTest extends TestSpec {
 

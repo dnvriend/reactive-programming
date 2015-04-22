@@ -1,4 +1,4 @@
-package com.test.week2
+package com.test.week2.state
 
 class BankAccount {
   private var balance = 0

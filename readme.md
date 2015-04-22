@@ -72,6 +72,13 @@ res3: Boolean = true
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
 - The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
 
+## Scalaz
+- [Scalaz - Scalaz](https://github.com/scalaz/scalaz) a Scala library for functional programming.
+- [Learning Scalaz](http://eed3si9n.com/learning-scalaz/)
+
+## GitHub Markdown
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
 ## Week 1
 - What does [invariant](http://en.wikipedia.org/wiki/Invariant_%28mathematics%29) mean?
 - [The Neophyte's Guide to Scala Part 12 - Type Classes](http://danielwestheide.com/blog/2013/02/06/the-neophytes-guide-to-scala-part-12-type-classes.html)
@@ -143,9 +150,4 @@ that `c` will change when we change either `a` and/or `b`.
 ### Video Resources
 - [An Introduction to Functional Reactive Programming](https://www.youtube.com/watch?v=ZOCCzDNsAtI)
 
-## Week 2
 
-
-# Scalaz
-- [Scalaz - Scalaz](https://github.com/scalaz/scalaz) a Scala library for functional programming.
-- [Learning Scalaz](http://eed3si9n.com/learning-scalaz/)
