@@ -68,10 +68,6 @@ scala> List(2, 1).sorted == List(2, 1).sorted
 res3: Boolean = true
 ```
 
-# Week 2
-
-# Documentation
-
 ## General
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
 - The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
@@ -82,11 +78,7 @@ res3: Boolean = true
 - [Learn yourself Haskell - Functors, Applicative Functors and Monoids](http://learnyouahaskell.com/functors-applicative-functors-and-monoids)
 - [Learn yourself Haskell - A fistful of Monads](http://learnyouahaskell.com/a-fistful-of-monads)
 
-# Week 2
-- [What is the difference between view, stream and iterator?](http://docs.scala-lang.org/tutorials/FAQ/stream-view-iterator.html)
-
-# Video resources
-## Week 1
+### Video resources
 - What is a [Priority Queue](https://www.youtube.com/watch?v=QJ_7S1p0Kj8)?
 - What is a [Binary Heap](https://www.youtube.com/watch?v=cEY_JAm7L_o)?
 - Algorithms with Attitude - [Introduction to Binary Heaps](https://www.youtube.com/watch?v=WCm3TqScBM8)
@@ -96,15 +88,62 @@ res3: Boolean = true
 - Algorithms with Attitude - [Lineair Time BuildHeap](https://www.youtube.com/watch?v=BlMQVkakxtE)
 - [Typeclasses in Scala with Dan Rosen](https://www.youtube.com/watch?v=sVMES4RZF-8) 
 
-## Week 2
-
-# Example source code
+### Example source code
 - [Vladimir Kostyukov's Scalacaster](https://github.com/vkostyukov/scalacaster): algorithms and data structures in Scala
 
-# Test frameworks
+### Test frameworks
 - [ScalaTest](http://www.scalatest.org/)
 - [ScalaCheck](http://scalacheck.org/)
 - [Generator-driven property checks](http://www.scalatest.org/user_guide/generator_driven_property_checks)
+
+## Week 2
+I would seriously advice reading / viewing the resources below to get a good idea on what 
+[Functional Reactive Programming (FTP)](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
+this week is push based, in which systems take events and push them through a 'signal' network to achieve a result. The basic
+idea of FRP that we focus on this week is that events are combined into 'signals' that always have a current value, but change discretely.
+The changes are event-driven. But instead of having an event handler that returns Unit, (like the onClick handler and such), we return
+a value. 
+
+FRP in a nutshell (for now at least):
+
+When we do an assignment in Scala, the following happens:
+
+```scala
+scala> var a = 1
+a: Int = 1
+
+scala> var b = 2
+b: Int = 2
+
+scala> var c = a + b
+c: Int = 3
+
+scala> a = 2
+a: Int = 2
+
+scala> c
+res1: Int = 3
+
+scala> var c = a + b
+c: Int = 4
+```
+
+As we can see, the value of `c` did not change, when we changed the value of `a` from `1` to `2`. This is normal behavior
+for us programmers, but what if, `c` would change when we changed the value of the dependent value `a`.
+
+This would mean that there is a `dependency` between `c`, `a` and `b`. We expressed this dependency in `c = a + b` but
+the value of `c` did not change when we changed `a`. In FRP the idea is that `c` will change when we change either `a` and/or `b`.
+
+- [What is the difference between view, stream and iterator?](http://docs.scala-lang.org/tutorials/FAQ/stream-view-iterator.html)
+- [Wikipedia - Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
+- [Deprecating the Observer Pattern - Odersky / Maier](http://infoscience.epfl.ch/record/176887/files/DeprecatingObservers2012.pdf)
+- [Stackoverflow - What happened to scala.react?](http://stackoverflow.com/questions/21546456/what-happened-to-scala-react)
+
+### Video Resources
+- [An Introduction to Functional Reactive Programming](https://www.youtube.com/watch?v=ZOCCzDNsAtI)
+
+## Week 2
+
 
 # Scalaz
 - [Scalaz - Scalaz](https://github.com/scalaz/scalaz) a Scala library for functional programming.
