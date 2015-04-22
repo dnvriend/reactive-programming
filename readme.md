@@ -98,7 +98,7 @@ res3: Boolean = true
 
 ## Week 2
 I would seriously advice reading / viewing the resources below to get a good idea on what 
-[Functional Reactive Programming (FTP)](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
+[Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
 this week is push based, in which systems take events and push them through a 'signal' network to achieve a result. The basic
 idea of FRP that we focus on this week is that events are combined into 'signals' that always have a current value, but change discretely.
 The changes are event-driven. But instead of having an event handler that returns Unit, (like the onClick handler and such), we return
@@ -129,10 +129,11 @@ c: Int = 4
 ```
 
 As we can see, the value of `c` did not change, when we changed the value of `a` from `1` to `2`. This is normal behavior
-for us programmers, but what if, `c` would change when we changed the value of the dependent value `a`.
+because we have expressed the relationship at one point in the execution of the program. 
 
-This would mean that there is a `dependency` between `c`, `a` and `b`. We expressed this dependency in `c = a + b` but
-the value of `c` did not change when we changed `a`. In FRP the idea is that `c` will change when we change either `a` and/or `b`.
+But what if, `c` would change when we changed the value of a dependent value like `a`. This would mean that there is a 
+`dependency` created between `c`, `a` and `b` that expresses how these values will relate over time. So the basic idea is 
+that `c` will change when we change either `a` and/or `b`.
 
 - [What is the difference between view, stream and iterator?](http://docs.scala-lang.org/tutorials/FAQ/stream-view-iterator.html)
 - [Wikipedia - Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
