@@ -5,12 +5,16 @@ import com.test.TestSpec
 class LoopTest extends TestSpec {
 
   "Scala" should "support the while loop" in {
-    // what am I even doing...
+    // please don't do this, scala has support for declarative style
     var i = 0
     while(i < 10) {
       i += 1
     }
     i shouldBe 10
+  }
+
+  it should "support declarative style 1" in {
+    (1 to 10).map(_ => 1).sum shouldBe 10
   }
 
   "WHILE" should "be implemented using a function" in {
@@ -110,7 +114,7 @@ class LoopTest extends TestSpec {
   }
 
   "Scala" should "support the do-while loop" in {
-    // no really, please stop..
+    // please don't do this, scala has support for declarative style
     var i = 0
     do {
       i += 1
@@ -118,7 +122,12 @@ class LoopTest extends TestSpec {
     i shouldBe 10
   }
 
+  it should "support declarative style 2" in {
+    (1 to 10).map(_ => 1).sum shouldBe 10
+  }
+
   "Scala" should "support a for loop with generators" in {
+    // please don't do this, scala has support for declarative style
     var j = 0
     for(i <- 1 to 3) {
       j += i
@@ -126,7 +135,7 @@ class LoopTest extends TestSpec {
     j shouldBe 6
   }
 
-  it should "do a better job, oh man..." in {
+  it should "support declarative style 3" in {
     (1 to 3).sum shouldBe 6
   }
 
