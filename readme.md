@@ -144,6 +144,80 @@ But what if, `c` would change when we changed the value of a dependent value lik
 `dependency` created between `c`, `a` and `b` that expresses how these values will relate over time. So the basic idea is 
 that `c` will change when we change either `a` and/or `b`.
 
+## Hint 1: TweetText
+The following should work:
+
+```scala
+ def tweetRemainingCharsCount(tweetText: Signal[String]): Signal[Int] =
+    Signal(MaxTweetLength - tweetLength(tweetText()))
+
+  def colorForRemainingCharsCount(remainingCharsCount: Signal[Int]): Signal[String] =
+    Signal {
+      remainingCharsCount() match {
+        case count if (0 to 14).contains(count) => "orange"
+        case count if count < 0 => "red"
+        case _ => "green"
+      }
+    }
+```
+
+## Hint 2: Polynomal
+Please first try it yourself, then if you wish, verify.
+
+```scala
+  def computeDelta(a: Signal[Double], b: Signal[Double], c: Signal[Double]): Signal[Double] =
+  Signal {
+    Math.pow(b(), 2) - (4 * a() * c())
+  }
+
+  def computeSolutions(a: Signal[Double], b: Signal[Double], c: Signal[Double], delta: Signal[Double]): Signal[Set[Double]] =
+    Signal {
+      delta() match {
+        case discriminant if discriminant < 0 => Set()
+        case discriminant if discriminant == 0 => Set(calcLeft(a(), b(), c()))
+        case discriminant => Set(calcLeft(a(), b(), c()), calcRight(a(), b(), c()))
+      }
+    }
+
+  def calcLeft(a: Double, b: Double, c: Double): Double =
+    (-1 * b + Math.sqrt(Math.pow(b, 2) - (4 * a * c))) / (2 * a)
+
+  def calcRight(a: Double, b: Double, c: Double): Double =
+    (-1 * b - Math.sqrt(Math.pow(b, 2) - (4 * a * c))) / (2 * a)
+```
+
+## Hint 3: Calculator
+Please first try it yourself, then if you wish, verify.
+
+```scala
+  def computeValues(namedExpressions: Map[String, Signal[Expr]]): Map[String, Signal[Double]] = {
+    namedExpressions.mapValues { expr =>
+      Signal(eval(expr(), namedExpressions))
+    }
+  }
+
+  def eval(expr: Expr, references: Map[String, Signal[Expr]]): Double = {
+    expr match {
+      case Literal(v) => v
+      case Ref(name) => eval(getReferenceExpr(name, references), references - name)
+      case Plus(aExpr, bExpr)   => eval(aExpr, references) + eval(bExpr, references)
+      case Minus(aExpr, bExpr)  => eval(aExpr, references) - eval(bExpr, references)
+      case Times(aExpr, bExpr)  => eval(aExpr, references) * eval(bExpr, references)
+      case Divide(aExpr, bExpr) => eval(aExpr, references) / eval(bExpr, references)
+      case _ => Double.MaxValue
+    }
+  }
+
+  /** Get the Expr for a referenced variables.
+   *  If the variable is not known, returns a literal NaN.
+   */
+  private def getReferenceExpr(name: String, references: Map[String, Signal[Expr]]): Expr = {
+    references.get(name).fold[Expr](Literal(Double.NaN)) {
+      exprSignal => exprSignal()
+    }
+  }
+```
+
 ## Documentation
 - [What is the difference between view, stream and iterator?](http://docs.scala-lang.org/tutorials/FAQ/stream-view-iterator.html)
 - [Wikipedia - Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
