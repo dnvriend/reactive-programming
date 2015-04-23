@@ -110,7 +110,7 @@ I would seriously advice reading / viewing the resources below to get a good ide
 [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
 this week is push based, in which systems take events and push them through a 'signal' network to achieve a result. The basic
 idea of FRP that we focus on this week is that events are combined into 'signals' that always have a current value, but change discretely.
-The changes are event-driven. But instead of having an event handler that returns Unit, (like the onClick handler and such), we return
+The changes are event-driven. But instead of having an event handler that returns Unit, (like the onClick handler and such), it returns
 a value. 
 
 FRP in a nutshell (for now at least):
@@ -147,8 +147,14 @@ that `c` will change when we change either `a` and/or `b`.
 ## Documentation
 - [What is the difference between view, stream and iterator?](http://docs.scala-lang.org/tutorials/FAQ/stream-view-iterator.html)
 - [Wikipedia - Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming)
-- [Deprecating the Observer Pattern - Odersky / Maier](http://infoscience.epfl.ch/record/176887/files/DeprecatingObservers2012.pdf)
+- [Functional Reactive Animation - Elliott / Hudak (PDF)](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.52.2850&rep=rep1&type=pdf)
+- [Deprecating the Observer Pattern - Odersky / Maier (PDF)](http://infoscience.epfl.ch/record/176887/files/DeprecatingObservers2012.pdf)
 - [Stackoverflow - What happened to scala.react?](http://stackoverflow.com/questions/21546456/what-happened-to-scala-react)
+
+## FRP Libraries
+- [scala.frp](https://github.com/dylemma/scala.frp) - [Dylan Halperin](https://github.com/dylemma) 
+- [scala.react](https://github.com/dylemma/scala.react) - [Dylan Halperin](https://github.com/dylemma)
+- [React4J](https://bitbucket.org/yann_caron/react4j/wiki/Home) - [Yann Caron](https://bitbucket.org/yann_caron)
 
 ## Books
 - [Reactive Design Patterns - Kuhn](http://manning.com/kuhn/) - [Chapter 1 (PDF)](http://manning.com/kuhn/RDP_meap_CH01.pdf)
@@ -160,4 +166,5 @@ that `c` will change when we change either `a` and/or `b`.
 ## Video
 - [An Introduction to Functional Reactive Programming](https://www.youtube.com/watch?v=ZOCCzDNsAtI)
 - [Functional Reactive Programming in Elm - Evan Czaplicki](https://www.youtube.com/watch?v=JreO-Kl0Ed4)
+- [Building Reactive Apps](https://www.youtube.com/watch?v=AFqFXlKrwRc) - [James Ward](http://www.jamesward.com/)
 
