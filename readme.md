@@ -158,4 +158,5 @@ that `c` will change when we change either `a` and/or `b`.
 ## Video
 - [An Introduction to Functional Reactive Programming](https://www.youtube.com/watch?v=ZOCCzDNsAtI)
 - [Functional Reactive Programming in Elm - Evan Czaplicki](https://www.youtube.com/watch?v=JreO-Kl0Ed4)
+- [Building Reactive Apps by James Ward](https://www.youtube.com/watch?v=AFqFXlKrwRc)
 
