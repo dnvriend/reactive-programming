@@ -1,5 +1,7 @@
 # Principles of Reactive Programming
-The examples for each week and some try-outs..
+The basic principle of reactive programming is: `Reacting to sequence of events that happen in time`, 
+and according to the [Reactive Manifesto](http://www.reactivemanifesto.org/), using these patterns to
+build software systems that are more robust, more resilient, more flexible and better positioned to meet modern demands.
 
 # General
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
@@ -158,5 +160,4 @@ that `c` will change when we change either `a` and/or `b`.
 ## Video
 - [An Introduction to Functional Reactive Programming](https://www.youtube.com/watch?v=ZOCCzDNsAtI)
 - [Functional Reactive Programming in Elm - Evan Czaplicki](https://www.youtube.com/watch?v=JreO-Kl0Ed4)
-- [Building Reactive Apps by James Ward](https://www.youtube.com/watch?v=AFqFXlKrwRc)
 
