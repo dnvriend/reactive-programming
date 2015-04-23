@@ -149,11 +149,11 @@ that `c` will change when we change either `a` and/or `b`.
 - [Stackoverflow - What happened to scala.react?](http://stackoverflow.com/questions/21546456/what-happened-to-scala-react)
 
 ## Books
-- [Reactive Design Patterns - Kuhn](http://manning.com/kuhn/)[Chapter 1 (PDF)](http://manning.com/kuhn/RDP_meap_CH01.pdf)
-- [Functional Reactive Programming - Blackheath](http://www.manning.com/blackheath/)[Chapter 1 (PDF)](http://www.manning.com/blackheath/FPR_MEAP_ch1.pdf)
-- [Reactive Web Applications with Play - Bernhardt](http://www.manning.com/bernhardt/)[Chapter 1 (PDF)](http://www.manning.com/bernhardt/RWAwithPlay_MEAP_ch01.pdf)
-- [Reactive Application Development - Devore](http://www.manning.com/devore/)[Chapter 1 (PDF)](http://www.manning.com/devore/RAD_MEAP_ch1.pdf)
-- [Functional and Reactive Domain Modeling - Ghosh](http://www.manning.com/ghosh2/)[Chapter 1 (PDF)](http://www.manning.com/ghosh2/FRDM_MEAP_CH01.pdf)
+- [Reactive Design Patterns - Kuhn](http://manning.com/kuhn/) - [Chapter 1 (PDF)](http://manning.com/kuhn/RDP_meap_CH01.pdf)
+- [Functional Reactive Programming - Blackheath](http://www.manning.com/blackheath/) - [Chapter 1 (PDF)](http://www.manning.com/blackheath/FPR_MEAP_ch1.pdf)
+- [Reactive Web Applications with Play - Bernhardt](http://www.manning.com/bernhardt/) - [Chapter 1 (PDF)](http://www.manning.com/bernhardt/RWAwithPlay_MEAP_ch01.pdf)
+- [Reactive Application Development - Devore](http://www.manning.com/devore/) - [Chapter 1 (PDF)](http://www.manning.com/devore/RAD_MEAP_ch1.pdf)
+- [Functional and Reactive Domain Modeling - Ghosh](http://www.manning.com/ghosh2/) - [Chapter 1 (PDF)](http://www.manning.com/ghosh2/FRDM_MEAP_CH01.pdf)
 
 ## Video
 - [An Introduction to Functional Reactive Programming](https://www.youtube.com/watch?v=ZOCCzDNsAtI)
