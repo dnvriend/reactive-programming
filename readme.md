@@ -106,7 +106,7 @@ res3: Boolean = true
 ```
 
 # Week 2
-I would seriously advice reading / viewing the resources below to get a good idea on what 
+I would advice reading / viewing the resources below to get a good idea on what 
 [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
 this week is push based, in which systems take events and push them through a 'signal' network to achieve a result. The basic
 idea of FRP that we focus on this week is that events are combined into 'signals' that always have a current value, but change discretely.
