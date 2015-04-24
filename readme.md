@@ -3,6 +3,8 @@ The basic principle of reactive programming is: `Reacting to sequence of events 
 and according to the [Reactive Manifesto](http://www.reactivemanifesto.org/), using these patterns to
 build software systems that are more robust, more resilient, more flexible and better positioned to meet modern demands.
 
+[![Build Status](https://travis-ci.org/dnvriend/reactive-programming.svg)](https://travis-ci.org/dnvriend/reactive-programming)
+
 # General
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
 - The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
