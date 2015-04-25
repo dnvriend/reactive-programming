@@ -21,6 +21,23 @@ build software systems that are more robust, more resilient, more flexible and b
 - [Scala Days 2014 - Berlin](https://www.parleys.com/channel/scala-days-2014)
 - [Scala Days 2013 - New York](https://www.parleys.com/channel/scaladays-2013)
 
+# Week 3
+
+## Documentation
+- [Scala - Futures](http://docs.scala-lang.org/overviews/core/futures.html)
+- [Akka  - Futures](http://doc.akka.io/docs/akka/2.3.10/scala/futures.html)
+- [The Neophyte's Guide to Scala Part 8 - Welcome to the Future](http://danielwestheide.com/blog/2013/01/09/the-neophytes-guide-to-scala-part-8-welcome-to-the-future.html)
+- [The Neophyte's Guide to Scala Part 9 - Promises and Futures in Practice](http://danielwestheide.com/blog/2013/01/16/the-neophytes-guide-to-scala-part-9-promises-and-futures-in-practice.html)
+- [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Monads and Effects](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/001-monads-and-effects.md)
+- [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Latency as an Effects](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/002-latency-as-an-effect.md)
+- [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Combinators on Futures](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/003-combinators-on-futures.md)
+- [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Composing Futures](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/004-composing-futures.md)
+- [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Promises](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/005-promises.md)
+
+## Video
+- [Promise of the Futures](https://www.youtube.com/results?search_query=scala+futures)
+- [Composable Futures with Akka 2.0 - Mike Slinn](https://www.youtube.com/watch?v=VCattsfHR4o)
+
 # Week 2
 I would advice reading / viewing the resources below to get a good idea on what 
 [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
