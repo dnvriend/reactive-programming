@@ -13,7 +13,10 @@ build software systems that are more robust, more resilient, more flexible and b
 - [Scalaz - Scalaz](https://github.com/scalaz/scalaz) a Scala library for functional programming.
 - [Learning Scalaz](http://eed3si9n.com/learning-scalaz/)
 
-# Reactive Streams (Cool stuff)
+# Stream Processing
+> Stream processing is a different paradigm to the Actor Model or to Future composition, therefore it may take some careful study of this subject until you feel familiar with the tools and techniques.
+-- <cite>Akka Streams Documentation</cite>
+
 - [Akka Streams Documentation 1.0-RC1](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala.html)
 - [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC1/)
 - [Reactive Streams](http://www.reactive-streams.org/)
@@ -26,7 +29,9 @@ build software systems that are more robust, more resilient, more flexible and b
 - [Scala Days 2014 - Berlin](https://www.parleys.com/channel/scala-days-2014)
 - [Scala Days 2013 - New York](https://www.parleys.com/channel/scaladays-2013)
 
-# Week 3
+# Week 4 - Stream Processing
+
+# Week 3 - Futures and Composition
 
 ## Documentation
 - [Scala - Futures](http://docs.scala-lang.org/overviews/core/futures.html)
@@ -43,7 +48,7 @@ build software systems that are more robust, more resilient, more flexible and b
 - [Promise of the Futures](https://www.youtube.com/results?search_query=scala+futures)
 - [Composable Futures with Akka 2.0 - Mike Slinn](https://www.youtube.com/watch?v=VCattsfHR4o)
 
-# Week 2
+# Week 2 - Functional Reactive Programming
 I would advice reading / viewing the resources below to get a good idea on what 
 [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
 this week is push based, in which systems take events and push them through a 'signal' network to achieve a result. The basic
@@ -180,7 +185,7 @@ Please first try it yourself, then if you wish, verify.
 - [Functional Reactive Programming in Elm - Evan Czaplicki](https://www.youtube.com/watch?v=JreO-Kl0Ed4)
 - [Building Reactive Apps](https://www.youtube.com/watch?v=AFqFXlKrwRc) - [James Ward](http://www.jamesward.com/)
 
-# Week 1
+# Week 1 - Functional Programming
 - What does [invariant](http://en.wikipedia.org/wiki/Invariant_%28mathematics%29) mean?
 - [The Neophyte's Guide to Scala Part 12 - Type Classes](http://danielwestheide.com/blog/2013/02/06/the-neophytes-guide-to-scala-part-12-type-classes.html)
 - [Learn yourself Haskell - Functors, Applicative Functors and Monoids](http://learnyouahaskell.com/functors-applicative-functors-and-monoids)
