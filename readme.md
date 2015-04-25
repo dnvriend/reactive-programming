@@ -18,7 +18,11 @@ build software systems that are more robust, more resilient, more flexible and b
 -- <cite>Akka Streams Documentation</cite>
 
 - [Akka Streams Documentation 1.0-RC1](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala.html)
+- [Quick Start - Reactive Tweets](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-quickstart.html#stream-quickstart-scala)
 - [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC1/)
+- [Design Principles behind Reactive Streams](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/stream-design.html#stream-design)
+- [Streams Cookbook](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-cookbook.html#stream-cookbook-scala)
+- [Overview of built-in stages and their semantics](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/stages-overview.html#stages-overview)
 - [Reactive Streams](http://www.reactive-streams.org/)
 
 # GitHub Markdown
