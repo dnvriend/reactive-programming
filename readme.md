@@ -13,6 +13,11 @@ build software systems that are more robust, more resilient, more flexible and b
 - [Scalaz - Scalaz](https://github.com/scalaz/scalaz) a Scala library for functional programming.
 - [Learning Scalaz](http://eed3si9n.com/learning-scalaz/)
 
+# Reactive Streams (Cool stuff)
+- [Akka Streams Documentation 1.0-RC1](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala.html)
+- [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC1/)
+- [Reactive Streams](http://www.reactive-streams.org/)
+
 # GitHub Markdown
 - [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
