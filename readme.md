@@ -33,8 +33,6 @@ build software systems that are more robust, more resilient, more flexible and b
 - [Scala Days 2014 - Berlin](https://www.parleys.com/channel/scala-days-2014)
 - [Scala Days 2013 - New York](https://www.parleys.com/channel/scaladays-2013)
 
-# Week 4 - Stream Processing
-
 # Week 3 - Futures and Composition
 
 ## Documentation
