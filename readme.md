@@ -36,6 +36,7 @@ build software systems that are more robust, more resilient, more flexible and b
 # Week 3 - Futures and Composition
 
 ## Documentation
+- [Scala - Async await](https://github.com/scala/async)
 - [Scala - Futures](http://docs.scala-lang.org/overviews/core/futures.html)
 - [Akka  - Futures](http://doc.akka.io/docs/akka/2.3.10/scala/futures.html)
 - [The Neophyte's Guide to Scala Part 8 - Welcome to the Future](http://danielwestheide.com/blog/2013/01/09/the-neophytes-guide-to-scala-part-8-welcome-to-the-future.html)
