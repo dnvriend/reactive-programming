@@ -1,5 +1,7 @@
 package com.test.week3
 
+import java.util.NoSuchElementException
+
 import com.test.TestSpec
 
 import scala.util.{Failure, Success, Try}
@@ -102,5 +104,22 @@ class AdventureGameTwoTest extends TestSpec {
         }
 
     treasure should be a 'success
+  }
+
+  it should "support other higher order functions" in {
+    val x = Try(1)
+    x should be a 'success
+    x should not be 'failure
+    x shouldBe Success(1)
+    x should not be Failure
+    x.get shouldBe 1
+    x.getOrElse(0) shouldBe 1
+    x.filter(_ == 1) shouldBe Success(1)
+    x.filter(_ == 0) should be a 'failure
+    x.foreach { x => assert(x == 1) }
+    x.isFailure shouldBe false
+    x.isSuccess shouldBe true
+    x.toOption shouldBe Some(1)
+    x.recoverWith { case _ => Try(2) } recover { case _ => 3 } shouldBe Success(1)
   }
 }

@@ -74,7 +74,7 @@ class FuturesTest extends TestSpec {
    */
 
   "Future waiting" should "block the thread until the result is available" in {
-    val future: Future[Int] = Future { 1 }.map(_*2)
+    val future: Future[Int] = Future(1).map( _ * 2 )
     val result: Int = Await.result(future, 10.millis)
     result shouldBe 2
   }
@@ -86,7 +86,8 @@ class FuturesTest extends TestSpec {
    */
 
   "Future callback" should "block the thread, until the thread is ready and test using callback" in {
-    val future: Future[Int] = Future { 1 }.map(_*2)
+    val future: Future[Int] = Future(1).map( _ * 2 )
+    // the onComplete is the callback
     future.onComplete {
       case Success(n) => n shouldBe 2
       case Failure(t) => fail(t)
@@ -101,7 +102,7 @@ class FuturesTest extends TestSpec {
    */
 
   "Failed future" should "complete with throwable" in {
-    val future: Future[Int] = Future { 2/ 0 }
+    val future: Future[Int] = Future { 2 / 0 }
     future.onComplete {
       case Failure(t: ArithmeticException) =>
       case Failure(t) => fail(t)
