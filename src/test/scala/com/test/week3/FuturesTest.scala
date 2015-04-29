@@ -66,7 +66,7 @@ class FuturesTest extends TestSpec {
 
   "FutureConcept" should "complete with value 2, sometime in the future" in {
     val future: Future[Int] = Future { 1 }.map(_*2)
-    future.isReadyWithin(10.millis) shouldBe true
+    future.isReadyWithin(1.minute) shouldBe true
     future.futureValue shouldBe 2
   }
 
@@ -77,7 +77,7 @@ class FuturesTest extends TestSpec {
 
   "Future waiting" should "block the thread until the result is available" in {
     val future: Future[Int] = Future(1).map( _ * 2 )
-    val result: Int = Await.result(future, 10.millis)
+    val result: Int = Await.result(future, 1.minute)
     result shouldBe 2
   }
 
@@ -94,9 +94,9 @@ class FuturesTest extends TestSpec {
       case Success(n) => n shouldBe 2
       case Failure(t) => fail(t)
     }
-    Await.ready(future, 10.millis)
+    Await.ready(future, 1.minute)
     // block the test thread to let the future evaluate
-    Thread.sleep(10.millis.toMillis)
+    Thread.sleep(100)
   }
 
   /**
@@ -110,8 +110,8 @@ class FuturesTest extends TestSpec {
       case Failure(t) => fail(t)
       case Success(n) => fail("Should not complete successfully")
     }
-    Await.ready(future, 10.millis)
-    Thread.sleep(10.millis.toMillis)
+    Await.ready(future, 1.minute)
+    Thread.sleep(100)
   }
 
   "Failed future" should "recover with a default value" in {
@@ -120,8 +120,8 @@ class FuturesTest extends TestSpec {
       case Success(n) => n shouldBe 0
       case Failure(t) => fail(t)
     }
-    Await.ready(future, 10.millis)
-    Thread.sleep(10.millis.toMillis)
+    Await.ready(future, 1.minute)
+    Thread.sleep(100)
   }
 
   "Future composition" should "map the result of the future with a new calculation" in {
