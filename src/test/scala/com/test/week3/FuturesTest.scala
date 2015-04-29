@@ -36,8 +36,10 @@ class FuturesTest extends TestSpec {
    * you'll see that the compiler will 'inject' an execution context. The 'dependency injection' mechanism for Scala
    * are implicits. Quick disclaimer, this is not exactly true, but it is enough to know for now. So just place the
    * execution context in implicit scope, and the compiler will do the rest.
+   *
+   * It is inherited from TestSpec
    */
-  implicit val executionContext: ExecutionContext = system.dispatcher
+//  implicit val executionContext: ExecutionContext = system.dispatcher
 
   /**
    * A Future is an object holding a value which may become available at some point. This value is usually the result of

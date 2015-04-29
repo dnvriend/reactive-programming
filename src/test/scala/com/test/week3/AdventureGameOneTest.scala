@@ -29,6 +29,10 @@ class AdventureGameOneTest extends TestSpec {
 
   // Note, all calls are blocking T => S
 
+  //
+  // Exceptions as an effect LOL :)
+  //
+
   "SimpleAdventure" should "buy treasure" in {
     val adventure = new SaveAdventure()
     val coins = adventure.collectCoins()
