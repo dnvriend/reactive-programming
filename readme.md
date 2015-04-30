@@ -14,6 +14,7 @@ These are my notes and study guide how I approach studying `Reactive Programming
 > the data flow. -- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Reactive_programming)</cite>
 
 # Typesafe Reactive Platform
+## Video
 - [Typesafe - Going Reactive in Java with Typesafe Reactive Platform](https://www.youtube.com/watch?v=y70Z5S2eSIo)
 - [Typesafe - Deep Dive into the Typesafe Reactive Platform - Akka and Scala](https://www.youtube.com/watch?v=fMWzKEN6uTY)
 - [Typesafe - Deep Dive into the Typesafe Reactive Platform - Activator and Play](https://www.youtube.com/watch?v=EJl9mQ0051g)
@@ -22,10 +23,11 @@ These are my notes and study guide how I approach studying `Reactive Programming
 - [What does it mean to be Reactive? - Erik Meijer](https://www.youtube.com/watch?v=sTSQlYX5DU0)
 
 # Rx
+## Video
 - [A Playful Introduction to Rx - Erik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
 - [RxJava: Reactive Extensions in Scala](https://www.youtube.com/watch?v=tOMK_FYJREw)
 
-# General
+# Scala
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
 - The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
 
@@ -34,11 +36,15 @@ These are my notes and study guide how I approach studying `Reactive Programming
 - [Learning Scalaz](http://eed3si9n.com/learning-scalaz/)
 
 # Stream Processing
-> Stream processing is a different paradigm to the Actor Model or to Future composition, therefore it may take some careful study of this subject until you feel familiar with the tools and techniques.
+> Stream processing is a different paradigm to the Actor Model or to Future composition, therefore it may take some 
+> careful study of this subject until you feel familiar with the tools and techniques.
 -- <cite>Akka Streams Documentation</cite>
 
+## Video
+- [Youtube - Spray and Akka HTTP](https://www.youtube.com/watch?v=o5PUDI4qi10)
+- [Youtube - Reactive Stream Processing with Akka Streams](https://www.youtube.com/watch?v=XCP6zg46utU)
 
-- [Spray and Akka HTTP](https://www.youtube.com/watch?v=o5PUDI4qi10)
+## Documentation
 - [Akka Streams Documentation 1.0-RC1](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala.html)
 - [Quick Start - Reactive Tweets](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-quickstart.html#stream-quickstart-scala)
 - [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC1/)
@@ -59,7 +65,8 @@ These are my notes and study guide how I approach studying `Reactive Programming
 > Futures provide a nice way to reason about performing many operations in parallel– in an efficient and 
 > non-blocking way. The idea is simple, a Future is a sort of a placeholder object that you can create for a result 
 > that does not yet exist. Generally, the result of the Future is computed concurrently and can be later collected. 
-> Composing concurrent tasks in this way tends to result in faster, asynchronous, non-blocking parallel code. -- <cite>[ScalaDocs](http://docs.scala-lang.org/overviews/core/futures.html)</cite>
+> Composing concurrent tasks in this way tends to result in faster, asynchronous, non-blocking parallel code. 
+-- <cite>[ScalaDocs](http://docs.scala-lang.org/overviews/core/futures.html)</cite>
 
 ## Documentation
 - [Scala - Async await](https://github.com/scala/async)
@@ -79,7 +86,9 @@ These are my notes and study guide how I approach studying `Reactive Programming
 
 # Week 2 - Functional Reactive Programming
 > Functional reactive programming (FRP) is a programming paradigm for reactive programming (asynchronous dataflow 
-> programming) using the building blocks of functional programming (e.g. map, reduce, filter). FRP has been used for > programming graphical user interfaces (GUIs), robotics, and music, aiming to simplify these problems by explicitly > modeling time. -- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Functional_reactive_programming)</cite>
+> programming) using the building blocks of functional programming (e.g. map, reduce, filter). FRP has been used for 
+> programming graphical user interfaces (GUIs), robotics, and music, aiming to simplify these problems by explicitly > modeling time. 
+-- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Functional_reactive_programming)</cite>
 
 I would advice reading / viewing the resources below to get a good idea on what 
 [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
