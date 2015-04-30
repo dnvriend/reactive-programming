@@ -56,6 +56,10 @@ These are my notes and study guide how I approach studying `Reactive Programming
 - [Scala Days 2013 - New York](https://www.parleys.com/channel/scaladays-2013)
 
 # Week 3 - Futures and Composition
+> Futures provide a nice way to reason about performing many operations in parallel– in an efficient and 
+> non-blocking way. The idea is simple, a Future is a sort of a placeholder object that you can create for a result 
+> that does not yet exist. Generally, the result of the Future is computed concurrently and can be later collected. 
+> Composing concurrent tasks in this way tends to result in faster, asynchronous, non-blocking parallel code. -- <cite>[ScalaDocs](http://docs.scala-lang.org/overviews/core/futures.html)</cite>
 
 ## Documentation
 - [Scala - Async await](https://github.com/scala/async)
@@ -74,6 +78,9 @@ These are my notes and study guide how I approach studying `Reactive Programming
 - [Composable Futures with Akka 2.0 - Mike Slinn](https://www.youtube.com/watch?v=VCattsfHR4o)
 
 # Week 2 - Functional Reactive Programming
+> Functional reactive programming (FRP) is a programming paradigm for reactive programming (asynchronous dataflow 
+> programming) using the building blocks of functional programming (e.g. map, reduce, filter). FRP has been used for > programming graphical user interfaces (GUIs), robotics, and music, aiming to simplify these problems by explicitly > modeling time. -- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Functional_reactive_programming)</cite>
+
 I would advice reading / viewing the resources below to get a good idea on what 
 [Functional Reactive Programming](http://en.wikipedia.org/wiki/Functional_reactive_programming) is. The model we use 
 this week is push based, in which systems take events and push them through a 'signal' network to achieve a result. The basic
