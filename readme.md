@@ -160,6 +160,45 @@ def start(relativePath: String)(handler: Request => Response): Subscription = {
 }
 ```
 
+## Hint 13: The solution
+You could probably rewrite the solution to:
+
+```scala
+def start(relativePath: String)(handler: Request => Response): Subscription = {
+  val listener = createListener(relativePath)
+  val listenerSubscription: Subscription = listener.start()
+  val requestSubscription: Subscription = Future.run() { (ct: CancellationToken) =>
+    Future {
+      while (ct.nonCancelled) {
+        Await.result(listener.nextRequest().map { req =>
+          respond(req._2, ct, handler(req._1))
+        }, Duration.Inf)
+      }
+    }
+  }
+  Subscription(listenerSubscription, requestSubscription)
+}
+```
+
+or
+
+```scala
+def start(relativePath: String)(handler: Request => Response): Subscription = {
+  val listener = createListener(relativePath)
+  val listenerSubscription: Subscription = listener.start()
+  val requestSubscription: Subscription = Future.run() { (ct: CancellationToken) =>
+    Future {
+      while (ct.nonCancelled) {
+        Await.result(listener.nextRequest().map {
+          case (req: Request, exch: Exchange ) => respond(exch, ct, handler(req))
+        }, Duration.Inf)
+      }
+    }
+  }
+  Subscription(listenerSubscription, requestSubscription)
+}
+```
+
 ## Video
 - [Promise of the Futures](https://www.youtube.com/results?search_query=scala+futures)
 - [Composable Futures with Akka 2.0 - Mike Slinn](https://www.youtube.com/watch?v=VCattsfHR4o)
