@@ -80,6 +80,86 @@ These are my notes and study guide how I approach studying `Reactive Programming
 - [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Composing Futures](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/004-composing-futures.md)
 - [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Promises](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/005-promises.md)
 
+## Hint 1: Future combinators
+Most combinators are explained in the videos by Eric Meijer. Please view these videos again and implement them in the
+nodescala package object. Some combinators are already available in the Future object itself, so if you are lazy, you
+can reuse those.
+
+## Hint 2: A future that does not complete
+Does a `Promise[T]().future` complete?
+
+## Hint 3: Launching the web server
+The timeout looks a whole lot like the `userInterrupted` future structure
+
+## Hint 4: TerminatedRequested Future
+Reuse the future `userInterrupted` and `timeout`. When `any` of those fail, the `terminatedRequested` future should fail.
+
+## Hint 5: Unsubscribe from the server
+Note that to cancel a Future, you should use the `val subscription: Subscription = Future.run() { (ct: CancellationToken) => }` future construct.  
+The `Future.run() { ct => }` construct returns a `Subscription` that can be used to `unsubscribe` from. When you call
+`subscription.unsubscribe`, the `CancellationToken`, that is available in the curried function (the `context` if you will), 
+that contains the members `isCancelled: Boolean` and `nonCancelled = !isCancelled` properties, can be queried to figure out
+whether or not the future has been canceled. 
+
+So the question remains, how does one `unsubscribe`, the thereby cancel all requests that the server handles, when a 
+`subscription` is in scope? 
+
+## Hint 6: Creating the response
+The `respond` method, that will be called by the `start` method (you should implement both), will stream the result back
+using the `exchange`'s `write` method. 
+
+In a loop, you should check whether or not the `token` has been canceled.
+
+In a loop, you should check whether or not the `response` has more Strings; it is an Iterator.
+
+After you're done writing to the `exchange`, please close the stream using `exchange.close()`
+
+## Hint 7: The solution
+The solution is:
+
+```scala
+private def respond(exchange: Exchange, token: CancellationToken, response: Response): Unit = {
+  while(response.hasNext && token.nonCancelled) {
+    exchange.write(response.next())
+  }
+  exchange.close()
+}
+```
+
+## Hint 8: The start method
+Eric Meijer likes the `async-await` construct, because you can use imperative constructs together with async constructs
+but still being non-blocking. The `while(ct.nonCanceled)` 'problem' makes it imperative.
+
+## Hint 9: The start method
+You should first create a `listener`, then `start` the listener, which returns a `Subscription`. Then you should 
+create a cancellable context using the `Future.run() {}` construct. You should then `loop` while the context is nonCanceled,
+then you should wait for a nextRequest from the listener, then you should respond
+ 
+## Hint 10: The start method
+Return a combined `Subscription` with the `Subscription(subscription1, subscription2)` construct.
+
+## Hint 11: The start method
+You can respond by applying the `handler` with the `request`, which gives you a `Response`, and calling the `respond` method.
+
+## Hint 12: The solution
+The solution is:
+
+```scala
+def start(relativePath: String)(handler: Request => Response): Subscription = {
+  val listener = createListener(relativePath)
+  val listenerSubscription: Subscription = listener.start()
+  val requestSubscription: Subscription = Future.run() { (ct: CancellationToken) =>
+    async {
+      while (ct.nonCancelled) {
+        val (req, exch) = await (listener.nextRequest())
+        respond(exch, ct, handler(req))
+      }
+    }
+  }
+  Subscription(listenerSubscription, requestSubscription)
+}
+```
+
 ## Video
 - [Promise of the Futures](https://www.youtube.com/results?search_query=scala+futures)
 - [Composable Futures with Akka 2.0 - Mike Slinn](https://www.youtube.com/watch?v=VCattsfHR4o)
