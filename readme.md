@@ -68,12 +68,17 @@ These are my notes and study guide how I approach studying `Reactive Programming
 > Composing concurrent tasks in this way tends to result in faster, asynchronous, non-blocking parallel code. 
 -- <cite>[ScalaDocs](http://docs.scala-lang.org/overviews/core/futures.html)</cite>
 
-## Documentation
+## Async-Await
 - [Scala - Async await](https://github.com/scala/async)
+- [The Future is not good enough: coding with async/await](http://engineering.roundupapp.co/the-future-is-not-good-enough-coding-with-async-await/)
+
+## Futures
 - [Scala - Futures](http://docs.scala-lang.org/overviews/core/futures.html)
 - [Akka  - Futures](http://doc.akka.io/docs/akka/2.3.10/scala/futures.html)
 - [The Neophyte's Guide to Scala Part 8 - Welcome to the Future](http://danielwestheide.com/blog/2013/01/09/the-neophytes-guide-to-scala-part-8-welcome-to-the-future.html)
 - [The Neophyte's Guide to Scala Part 9 - Promises and Futures in Practice](http://danielwestheide.com/blog/2013/01/16/the-neophytes-guide-to-scala-part-9-promises-and-futures-in-practice.html)
+
+## Notes from the previous year
 - [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Monads and Effects](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/001-monads-and-effects.md)
 - [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Latency as an Effects](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/002-latency-as-an-effect.md)
 - [Ian Irvine](https://github.com/iirvine) - [Notes (2014) - Combinators on Futures](https://github.com/iirvine/principles-of-reactive-programming/blob/master/notes/week-3/003-combinators-on-futures.md)
