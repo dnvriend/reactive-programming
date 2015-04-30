@@ -1,9 +1,17 @@
 # Principles of Reactive Programming
-The basic principle of reactive programming is: `Reacting to sequence of events that happen in time`, 
-and according to the [Reactive Manifesto](http://www.reactivemanifesto.org/), using these patterns to
-build software systems that are more robust, more resilient, more flexible and better positioned to meet modern demands.
+These are my notes and study guide how I approach studying `Reactive Programming`.
 
 [![Build Status](https://travis-ci.org/dnvriend/reactive-programming.svg)](https://travis-ci.org/dnvriend/reactive-programming)
+
+# What is Reactive Programming (RP)?
+> The basic principle of reactive programming is: `Reacting to sequence of events that happen in time`, 
+> and, using these patterns to, build software systems that are more robust, more resilient, more flexible and 
+> better positioned to meet modern demands. -- <cite>[Reactive Manifesto](http://www.reactivemanifesto.org/)</cite>
+
+> In computing, reactive programming is a `programming paradigm oriented around data flows and the propagation of 
+> change`. This means that it should be possible to express static or dynamic data flows with ease in the 
+> programming languages used, and that the underlying execution model will automatically propagate changes through 
+> the data flow. -- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Reactive_programming)</cite>
 
 # Typesafe Reactive Platform
 - [Typesafe - Going Reactive in Java with Typesafe Reactive Platform](https://www.youtube.com/watch?v=y70Z5S2eSIo)
