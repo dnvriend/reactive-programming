@@ -22,10 +22,23 @@ These are my notes and study guide how I approach studying `Reactive Programming
 - [Typesafe - Deep Dive into the Typesafe Reactive Platform - Ecosystem and Tools](https://www.youtube.com/watch?v=3nNerwsqrQI)
 - [What does it mean to be Reactive? - Erik Meijer](https://www.youtube.com/watch?v=sTSQlYX5DU0)
 
-# Rx
+# Week 4: Rx: Reactive Extensions
 ## Video
 - [A Playful Introduction to Rx - Erik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
 - [RxJava: Reactive Extensions in Scala](https://www.youtube.com/watch?v=tOMK_FYJREw)
+- [Ben Christensen - "Functional Reactive Programming with RxJava](https://www.youtube.com/watch?v=_t06LRX0DV0)
+- [DevCamp 2010 Keynote - Rx: Curing your asynchronous programming blues](http://channel9.msdn.com/Blogs/codefest/DC2010T0100-Keynote-Rx-curing-your-asynchronous-programming-blues)
+- [Channel 9 - Rx Workshop: Introduction](http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Introduction)
+
+## Books
+- [Free online - Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)
+
+## Docs
+- [ReactiveX - Portal](http://reactivex.io/)
+- [RxScala](https://github.com/ReactiveX/RxScala)
+- [RxJava](https://github.com/ReactiveX/RxJava)
+- [Lee Campbell - Reactive Extensions for .NET an Introduction](http://leecampbell.blogspot.co.uk/2010/08/reactive-extensions-for-net.html)
+- [MSDN - The Reactive Extensions (Rx)...](https://msdn.microsoft.com/en-us/data/gg577609)
 
 # Scala
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
