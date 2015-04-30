@@ -5,15 +5,17 @@ build software systems that are more robust, more resilient, more flexible and b
 
 [![Build Status](https://travis-ci.org/dnvriend/reactive-programming.svg)](https://travis-ci.org/dnvriend/reactive-programming)
 
-# Typesafe
+# Typesafe Reactive Platform
 - [Typesafe - Going Reactive in Java with Typesafe Reactive Platform](https://www.youtube.com/watch?v=y70Z5S2eSIo)
 - [Typesafe - Deep Dive into the Typesafe Reactive Platform - Akka and Scala](https://www.youtube.com/watch?v=fMWzKEN6uTY)
 - [Typesafe - Deep Dive into the Typesafe Reactive Platform - Activator and Play](https://www.youtube.com/watch?v=EJl9mQ0051g)
 - [Typesafe - What Have The Monads Ever Done For Us with Dick Wall](https://www.youtube.com/watch?v=2IYNPUp751g)
 - [Typesafe - Deep Dive into the Typesafe Reactive Platform - Ecosystem and Tools](https://www.youtube.com/watch?v=3nNerwsqrQI)
+- [What does it mean to be Reactive? - Erik Meijer](https://www.youtube.com/watch?v=sTSQlYX5DU0)
+
+# Rx
 - [A Playful Introduction to Rx - Erik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
 - [RxJava: Reactive Extensions in Scala](https://www.youtube.com/watch?v=tOMK_FYJREw)
-- [What does it mean to be Reactive? - Erik Meijer](https://www.youtube.com/watch?v=sTSQlYX5DU0)
 
 # General
 - The [Scala Source Code on GitHub](https://github.com/scala/scala)
@@ -27,6 +29,8 @@ build software systems that are more robust, more resilient, more flexible and b
 > Stream processing is a different paradigm to the Actor Model or to Future composition, therefore it may take some careful study of this subject until you feel familiar with the tools and techniques.
 -- <cite>Akka Streams Documentation</cite>
 
+
+- [Spray and Akka HTTP](https://www.youtube.com/watch?v=o5PUDI4qi10)
 - [Akka Streams Documentation 1.0-RC1](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala.html)
 - [Quick Start - Reactive Tweets](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-quickstart.html#stream-quickstart-scala)
 - [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC1/)
