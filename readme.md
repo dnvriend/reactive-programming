@@ -14,7 +14,7 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 > the data flow. -- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Reactive_programming)</cite>
 
 - [Youtube: Erik Meijer - What does it mean to be Reactive?](https://www.youtube.com/watch?v=sTSQlYX5DU0)
-- [Youtube: Go Reactive at the Trivento Summercamp](https://www.youtube.com/watch?v=auYuWBudVt8)
+- [Youtube: Dr. Roland Kuhn - Go Reactive at the Trivento Summercamp](https://www.youtube.com/watch?v=auYuWBudVt8)
 
 # Week 4: Rx: Reactive Extensions
 > Users expect real time data. They want their tweets now. Their order confirmed now. They need prices accurate as of now. Their online games need to be responsive. As a developer, you demand fire-and-forget messaging. You don't want to be blocked waiting for a result. You want to have the result `pushed` to you when it is ready. Even better, when working with result sets, you want to receive individual results as they are ready. You do not want to wait for the entire set to be processed before you see the first row. The world has moved to `push`; users are waiting for us to catch up. Developers have tools to `push` data, this is easy. Developers need tools to `react to push data`. 
