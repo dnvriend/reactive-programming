@@ -42,6 +42,8 @@ Please note that Rx focusses on `push-based` events. There is no way for the net
 - [RxScala](https://github.com/ReactiveX/RxScala)
 - [RxJava](https://github.com/ReactiveX/RxJava)
 - [RxJava Wiki](https://github.com/ReactiveX/RxJava/wiki)
+- [Microsoft Open Technologies - Rx](https://rx.codeplex.com/)
+- [The Rx Observable](http://reactivex.io/documentation/observable.html)
 - [Reactive Programming in the Netflix API with RxJava](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html)
 - [Lee Campbell - Reactive Extensions for .NET an Introduction](http://leecampbell.blogspot.co.uk/2010/08/reactive-extensions-for-net.html)
 - [MSDN - The Reactive Extensions (Rx)...](https://msdn.microsoft.com/en-us/data/gg577609)
@@ -460,6 +462,24 @@ res3: Boolean = true
 - [Streams Cookbook](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-cookbook.html#stream-cookbook-scala)
 - [Overview of built-in stages and their semantics](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/stages-overview.html#stages-overview)
 - [Reactive Streams](http://www.reactive-streams.org/)
+
+# Hystrix
+> Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.
+-- <cite>[Hystrix - GitHub](https://github.com/Netflix/Hystrix)</cite>
+
+> Applications in complex distributed architectures have dozens of dependencies, each of which will inevitably fail at some point. If the host application is not isolated from these external failures, it risks being taken down with them.
+-- <cite>[Hystrix Wiki](https://github.com/Netflix/Hystrix/wiki)</cite>
+
+> Hystrix is not about Futures and Promises, it is about bulk-heading and isolating dependencies by limiting concurrent execution, circuit breakers, real time monitoring and metrics. Futures are just a mechanism by which async execution is exposed. Futures by themselves do not provide the same degree of fault-tolerance functionality (though parts of it can be achieved with careful use of timeouts and thread-pool sizing). You could think of Hystrix as a hardened extension of a Future.
+-- <cite>[Google Groups](https://groups.google.com/forum/#!topic/hystrixoss/jAL3tV9lc30)</cite>
+
+Note; it basically focusses on the [Resilient](http://www.reactivemanifesto.org/) part of Reactive applications.
+
+## Documentation
+- [Netflix - Introducing Hystrix for Resilience Engineering](http://techblog.netflix.com/2012/11/hystrix.html)
+- [Enonic - Resilience with Hystrix](http://labs.enonic.com/articles/resilience-with-hystrix)
+- [Ben Christensen - Application Resilience in a Service-Oriented Architecture using Hystrix](http://benjchristensen.com/2013/06/10/application-resilience-in-a-service-oriented-architecture-using-hystrix/)
+- [Ben Christensen - Application Resilience Engineering and Operations at Netflix with Hystrix - JavaOne 2013](https://speakerdeck.com/benjchristensen/application-resilience-engineering-and-operations-at-netflix-with-hystrix-javaone-2013)
 
 # GitHub Markdown
 - [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
