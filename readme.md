@@ -25,7 +25,7 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 > You can think of Rx as providing an API similar to Java 8 / Groovy / Scala collections (methods like filter, forEach, map, reduce, zip etc) - but which operates on an asynchronous stream of events rather than a collection. So you could think of Rx as like working with asynchronous `push-based` collections (rather than the traditional synchronous pull based collections). 
 -- <cite>[Camel Rx](http://camel.apache.org/rx.html)</cite>
 
-Please note that Rx focusses on `push-based` events. There is no way for the network to go from a `push-based` model to a `pull-based` model like with [Reactive Streams](http://www.reactive-streams.org/), because the network has no notion of streams, so there is no upwards/downwards stream that communicates the demand and supply of data on which the network can react. The [RxJavaReactiveStreams](https://github.com/ReactiveX/RxJavaReactiveStreams) projects fills this gap. 
+Please note that Rx focusses on `push-based` events. There is no way for the network to go from a `push-based` model to a `pull-based` model like with [Reactive Streams](http://www.reactive-streams.org/), because the network has no notion of an upstream (the demand stream), in which the `subscriber` communicates its demand for data to the `publisher`. With Rx there is only a downwards stream, in which the `publisher` pushes the data-items to the `subscribers`. The [RxJavaReactiveStreams](https://github.com/ReactiveX/RxJavaReactiveStreams) project makes Rx compatible with [Reactive Streams](http://www.reactive-streams.org/).
 
 ## Video
 - [A Playful Introduction to Rx - Erik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
@@ -451,6 +451,7 @@ res3: Boolean = true
 -- <cite>Akka Streams Documentation</cite>
 
 ## Video
+- [Youtube - Introducing Reactive Streams](https://www.youtube.com/watch?v=khmVMvlP_QA)
 - [Youtube - Spray and Akka HTTP](https://www.youtube.com/watch?v=o5PUDI4qi10)
 - [Youtube - Reactive Stream Processing with Akka Streams](https://www.youtube.com/watch?v=XCP6zg46utU)
 
