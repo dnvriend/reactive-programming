@@ -57,6 +57,7 @@ Please note that Rx focusses on `push-based` events. There is no way for the net
 
 ## Async-Await
 - [Scala - Async await](https://github.com/scala/async)
+- [Scala - SIP-22 - Async](http://docs.scala-lang.org/sips/pending/async.html)
 - [The Future is not good enough: coding with async/await](http://engineering.roundupapp.co/the-future-is-not-good-enough-coding-with-async-await/)
 
 ## Futures
