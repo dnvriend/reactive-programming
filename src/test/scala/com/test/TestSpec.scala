@@ -4,7 +4,7 @@ import java.io.IOException
 
 import akka.actor.ActorSystem
 import org.scalatest.concurrent.ScalaFutures
-import org.scalatest.{TryValues, FlatSpec, Matchers}
+import org.scalatest.{OptionValues, TryValues, FlatSpec, Matchers}
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
@@ -14,7 +14,7 @@ object Random {
   def apply(): Random = new Random()
 }
 
-trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues {
+trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues with OptionValues {
   implicit val system: ActorSystem = ActorSystem("test")
   implicit val ec: ExecutionContext = system.dispatcher
   implicit val pc: PatienceConfig = PatienceConfig(timeout = 50.seconds)
