@@ -1,5 +1,5 @@
 # Principles of Reactive Programming
-These are my notes and study guide how I approach studying `Reactive Programming`.
+These are my notes and study guide how I approach studying `Principles of Reactive Programming` from [Coursera](https://class.coursera.org/reactive-002).
 
 [![Build Status](https://travis-ci.org/dnvriend/reactive-programming.svg)](https://travis-ci.org/dnvriend/reactive-programming)
 
@@ -12,15 +12,6 @@ These are my notes and study guide how I approach studying `Reactive Programming
 > change`. This means that it should be possible to express static or dynamic data flows with ease in the 
 > programming languages used, and that the underlying execution model will automatically propagate changes through 
 > the data flow. -- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Reactive_programming)</cite>
-
-# Typesafe Reactive Platform
-## Video
-- [Typesafe - Going Reactive in Java with Typesafe Reactive Platform](https://www.youtube.com/watch?v=y70Z5S2eSIo)
-- [Typesafe - Deep Dive into the Typesafe Reactive Platform - Akka and Scala](https://www.youtube.com/watch?v=fMWzKEN6uTY)
-- [Typesafe - Deep Dive into the Typesafe Reactive Platform - Activator and Play](https://www.youtube.com/watch?v=EJl9mQ0051g)
-- [Typesafe - What Have The Monads Ever Done For Us with Dick Wall](https://www.youtube.com/watch?v=2IYNPUp751g)
-- [Typesafe - Deep Dive into the Typesafe Reactive Platform - Ecosystem and Tools](https://www.youtube.com/watch?v=3nNerwsqrQI)
-- [What does it mean to be Reactive? - Erik Meijer](https://www.youtube.com/watch?v=sTSQlYX5DU0)
 
 # Week 4: Rx: Reactive Extensions
 ## Video
@@ -39,40 +30,6 @@ These are my notes and study guide how I approach studying `Reactive Programming
 - [RxJava](https://github.com/ReactiveX/RxJava)
 - [Lee Campbell - Reactive Extensions for .NET an Introduction](http://leecampbell.blogspot.co.uk/2010/08/reactive-extensions-for-net.html)
 - [MSDN - The Reactive Extensions (Rx)...](https://msdn.microsoft.com/en-us/data/gg577609)
-
-# Scala
-- The [Scala Source Code on GitHub](https://github.com/scala/scala)
-- The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
-
-# Scalaz
-- [Scalaz - Scalaz](https://github.com/scalaz/scalaz) a Scala library for functional programming.
-- [Learning Scalaz](http://eed3si9n.com/learning-scalaz/)
-
-# Stream Processing
-> Stream processing is a different paradigm to the Actor Model or to Future composition, therefore it may take some 
-> careful study of this subject until you feel familiar with the tools and techniques.
--- <cite>Akka Streams Documentation</cite>
-
-## Video
-- [Youtube - Spray and Akka HTTP](https://www.youtube.com/watch?v=o5PUDI4qi10)
-- [Youtube - Reactive Stream Processing with Akka Streams](https://www.youtube.com/watch?v=XCP6zg46utU)
-
-## Documentation
-- [Akka Streams Documentation 1.0-RC1](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala.html)
-- [Quick Start - Reactive Tweets](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-quickstart.html#stream-quickstart-scala)
-- [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC1/)
-- [Design Principles behind Reactive Streams](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/stream-design.html#stream-design)
-- [Streams Cookbook](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-cookbook.html#stream-cookbook-scala)
-- [Overview of built-in stages and their semantics](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/stages-overview.html#stages-overview)
-- [Reactive Streams](http://www.reactive-streams.org/)
-
-# GitHub Markdown
-- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-
-# Parleys
-- [Scala Days 2015 - San Fransisco](https://www.parleys.com/channel/scala-days-san-francisco-2015)
-- [Scala Days 2014 - Berlin](https://www.parleys.com/channel/scala-days-2014)
-- [Scala Days 2013 - New York](https://www.parleys.com/channel/scaladays-2013)
 
 # Week 3 - Futures and Composition
 > Futures provide a nice way to reason about performing many operations in parallel– in an efficient and 
@@ -453,3 +410,49 @@ res2: Boolean = true
 scala> List(2, 1).sorted == List(2, 1).sorted
 res3: Boolean = true
 ```
+
+# Typesafe Reactive Platform
+## Video
+- [Typesafe - Going Reactive in Java with Typesafe Reactive Platform](https://www.youtube.com/watch?v=y70Z5S2eSIo)
+- [Typesafe - Deep Dive into the Typesafe Reactive Platform - Akka and Scala](https://www.youtube.com/watch?v=fMWzKEN6uTY)
+- [Typesafe - Deep Dive into the Typesafe Reactive Platform - Activator and Play](https://www.youtube.com/watch?v=EJl9mQ0051g)
+- [Typesafe - What Have The Monads Ever Done For Us with Dick Wall](https://www.youtube.com/watch?v=2IYNPUp751g)
+- [Typesafe - Deep Dive into the Typesafe Reactive Platform - Ecosystem and Tools](https://www.youtube.com/watch?v=3nNerwsqrQI)
+- [What does it mean to be Reactive? - Erik Meijer](https://www.youtube.com/watch?v=sTSQlYX5DU0)
+
+# Scala
+- The [Scala Source Code on GitHub](https://github.com/scala/scala)
+- The [Scala API Docs for 2.11.6](http://www.scala-lang.org/files/archive/api/2.11.6/#package)
+
+# Scalaz
+- [Scalaz - Scalaz](https://github.com/scalaz/scalaz) a Scala library for functional programming.
+- [Learning Scalaz](http://eed3si9n.com/learning-scalaz/)
+
+# Stream Processing
+> Stream processing is a different paradigm to the Actor Model or to Future composition, therefore it may take some 
+> careful study of this subject until you feel familiar with the tools and techniques.
+-- <cite>Akka Streams Documentation</cite>
+
+## Video
+- [Youtube - Spray and Akka HTTP](https://www.youtube.com/watch?v=o5PUDI4qi10)
+- [Youtube - Reactive Stream Processing with Akka Streams](https://www.youtube.com/watch?v=XCP6zg46utU)
+
+## Documentation
+- [Akka Streams Documentation 1.0-RC1](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala.html)
+- [Quick Start - Reactive Tweets](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-quickstart.html#stream-quickstart-scala)
+- [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC1/)
+- [Design Principles behind Reactive Streams](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/stream-design.html#stream-design)
+- [Streams Cookbook](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/scala/stream-cookbook.html#stream-cookbook-scala)
+- [Overview of built-in stages and their semantics](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC1/stages-overview.html#stages-overview)
+- [Reactive Streams](http://www.reactive-streams.org/)
+
+# GitHub Markdown
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+# Parleys
+- [Scala Days 2015 - San Fransisco](https://www.parleys.com/channel/scala-days-san-francisco-2015)
+- [Scala Days 2014 - Berlin](https://www.parleys.com/channel/scala-days-2014)
+- [Scala Days 2013 - New York](https://www.parleys.com/channel/scaladays-2013)
+
+# Number of students enrolled
+On 2015-04-28 there were `23,200` students enrolled, which is roughly `12,000` less than last time (2014 edition). 
