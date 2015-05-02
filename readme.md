@@ -13,6 +13,8 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 > programming languages used, and that the underlying execution model will automatically propagate changes through 
 > the data flow. -- <cite>[Wikipedia](http://en.wikipedia.org/wiki/Reactive_programming)</cite>
 
+- [Youtube: Erik Meijer - What does it mean to be Reactive?](https://www.youtube.com/watch?v=sTSQlYX5DU0)
+
 # Week 4: Rx: Reactive Extensions
 ## Video
 - [A Playful Introduction to Rx - Erik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
