@@ -16,6 +16,14 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 - [Youtube: Erik Meijer - What does it mean to be Reactive?](https://www.youtube.com/watch?v=sTSQlYX5DU0)
 
 # Week 4: Rx: Reactive Extensions
+> Users expect real time data. They want their tweets now. Their order confirmed now. They need prices accurate as of now. Their online games need to be responsive. As a developer, you demand fire-and-forget messaging. You don't want to be blocked waiting for a result. You want to have the result `pushed` to you when it is ready. Even better, when working with result sets, you want to receive individual results as they are ready. You do not want to wait for the entire set to be processed before you see the first row. The world has moved to `push`; users are waiting for us to catch up. Developers have tools to `push` data, this is easy. Developers need tools to `react to push data`. 
+-- <cite>[Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)</cite>
+
+> Rx offers a natural paradigm for dealing with sequences of events. A sequence can contain zero or more events. Rx proves to be most valuable when `composing sequences of events`. 
+-- <cite>[Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)</cite>
+
+Please note that Rx focusses on `push-based` events. There is no way for the network to go from a `push-based` model to a `pull-based` model like with [Reactive Streams](http://www.reactive-streams.org/). The [RxJavaReactiveStreams](https://github.com/ReactiveX/RxJavaReactiveStreams) projects fills this gap. 
+
 ## Video
 - [A Playful Introduction to Rx - Erik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
 - [RxJava: Reactive Extensions in Scala](https://www.youtube.com/watch?v=tOMK_FYJREw)
@@ -30,6 +38,8 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 - [ReactiveX - Portal](http://reactivex.io/)
 - [RxScala](https://github.com/ReactiveX/RxScala)
 - [RxJava](https://github.com/ReactiveX/RxJava)
+- [RxJava Wiki](https://github.com/ReactiveX/RxJava/wiki)
+- [Reactive Programming in the Netflix API with RxJava](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html)
 - [Lee Campbell - Reactive Extensions for .NET an Introduction](http://leecampbell.blogspot.co.uk/2010/08/reactive-extensions-for-net.html)
 - [MSDN - The Reactive Extensions (Rx)...](https://msdn.microsoft.com/en-us/data/gg577609)
 
