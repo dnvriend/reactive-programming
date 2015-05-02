@@ -3,8 +3,10 @@ package com.test
 import java.io.IOException
 
 import akka.actor.ActorSystem
+import akka.event.{LoggingAdapter, Logging}
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{OptionValues, TryValues, FlatSpec, Matchers}
+import rx.lang.scala._
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
@@ -17,6 +19,7 @@ object Random {
 trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues with OptionValues {
   implicit val system: ActorSystem = ActorSystem("test")
   implicit val ec: ExecutionContext = system.dispatcher
+  val log: LoggingAdapter = Logging(system, this.getClass)
   implicit val pc: PatienceConfig = PatienceConfig(timeout = 50.seconds)
 
   implicit class PimpedByteArray(arr: Array[Byte]) {
@@ -48,5 +51,14 @@ trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues w
 
     def sendToUsa(payload: Array[Byte], failed: Boolean = false): Future[Array[Byte]] =
       send(payload, "fromUsa", failed)
+  }
+
+
+   /** Subscribes to obs and waits until obs has completed. Note that if you subscribe to
+    *  obs yourself and also call waitFor(obs), all side-effects of subscribing to obs
+    *  will happen twice.
+    */
+  def waitFor[T](obs: Observable[T]): Unit = {
+    obs.toBlocking.toIterable.last
   }
 }

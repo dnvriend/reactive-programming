@@ -7,6 +7,10 @@ import scala.concurrent.duration._
 class HelloRxTest extends TestSpec {
 
   /**
+   * Observables are asynchronous streams of data.
+   *
+   * Contrary to Futures, they can return multiple values.
+   *
    * In ReactiveX an `observer` subscribes to an `Observable`.
    *
    * Then that observer `reacts` to whatever item or sequence
@@ -97,5 +101,57 @@ class HelloRxTest extends TestSpec {
     val o1 = List(0, 1, 2).toObservable
     val o2 = List(3, 4, 5).toObservable
     o2.merge(o1).take(6).toList.toBlocking.head shouldBe List(3, 4, 5, 0, 1, 2)
+  }
+
+  "Observables" should "be used as follows" in {
+   val obs: Observable[Seq[Long]] =
+     observableThatEmitsNumbers // emit numbers
+       .slidingBuffer(2, 1)     // buffer 2 elements, skip 1, so (0, 1), (1, 2), (2, 3) etc
+       .take(2)                 // take 2 pairs, then unsubscribe automatically
+
+    obs.subscribe(e => log.info("{}", e))
+    waitFor(obs)
+  }
+
+  it should "filter" in {
+    val obs = observableThatEmitsNumbers // emit numbers
+      .filter(_ % 2 == 0)                // only emit elements that are even numbers
+      .slidingBuffer(2, 2)               // buffer 2 elements and skip 2 (0, 2), (4, 6) etc
+      .take(2)                           // take 2 pairs
+
+    obs.subscribe (e => log.info("{}", e))
+    waitFor(obs)
+  }
+
+  it should "flatMap" in {
+    val o1 = observableThatEmitsNumbers.take(2)
+    val o2 = observableThatEmitsNumbers.take(5)
+    o1.flatMap(_ => o2).toList.toBlocking.head should not be empty // the list is non-deterministic
+  }
+
+  it should "merge" in {
+    val o1 = observableThatEmitsNumbers.take(2)
+    val o2 = observableThatEmitsNumbers.take(5)
+    o1.merge(o2).toList.toBlocking.head shouldBe List(0, 0, 1, 1, 2, 3, 4)
+  }
+
+  it should "concat" in {
+    val o1 = observableThatEmitsNumbers.take(2)
+    val o2 = observableThatEmitsNumbers.take(5)
+    (o1 ++ o2).toList.toBlocking.head shouldBe List(0, 1, 0, 1, 2, 3, 4)
+  }
+
+  it should "sum" in {
+    observableThatEmitsNumbers.take(5).sum.toBlocking.head shouldBe 10
+  }
+
+  it should "count" in {
+    observableThatEmitsNumbers.take(5).countLong.toBlocking.head shouldBe 5
+  }
+
+  it should "zip" in {
+    val o1 = observableThatEmitsNumbers.take(3)
+    val o2 = observableThatEmitsNumbers.drop(5).take(5)
+    o1.zip(o2).toList.toBlocking.head shouldBe List((0, 5), (1, 6), (2, 7))
   }
 }

@@ -38,6 +38,7 @@ Please note that Rx focusses on `push-based` events. There is no way for the net
 - [Free online - Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)
 
 ## Docs
+- [Rx - Operators Reference](http://reactivex.io/documentation/operators.html)
 - [ReactiveX - Portal](http://reactivex.io/)
 - [RxScala](https://github.com/ReactiveX/RxScala)
 - [RxJava](https://github.com/ReactiveX/RxJava)
@@ -345,6 +346,7 @@ Please first try it yourself, then if you wish, verify.
 - [Learn yourself Haskell - A fistful of Monads](http://learnyouahaskell.com/a-fistful-of-monads)
 
 ## Video
+- [Brian Beckman - Don't fear the Monad](https://www.youtube.com/watch?v=ZhuHCtR3xq8)
 - What is a [Priority Queue](https://www.youtube.com/watch?v=QJ_7S1p0Kj8)?
 - What is a [Binary Heap](https://www.youtube.com/watch?v=cEY_JAm7L_o)?
 - Algorithms with Attitude - [Introduction to Binary Heaps](https://www.youtube.com/watch?v=WCm3TqScBM8)
