@@ -22,7 +22,10 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 > Rx offers a natural paradigm for dealing with sequences of events. A sequence can contain zero or more events. Rx proves to be most valuable when `composing sequences of events`. 
 -- <cite>[Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)</cite>
 
-Please note that Rx focusses on `push-based` events. There is no way for the network to go from a `push-based` model to a `pull-based` model like with [Reactive Streams](http://www.reactive-streams.org/). The [RxJavaReactiveStreams](https://github.com/ReactiveX/RxJavaReactiveStreams) projects fills this gap. 
+> You can think of Rx as providing an API similar to Java 8 / Groovy / Scala collections (methods like filter, forEach, map, reduce, zip etc) - but which operates on an asynchronous stream of events rather than a collection. So you could think of Rx as like working with asynchronous `push-based` collections (rather than the traditional synchronous pull based collections). 
+-- <cite>[Camel Rx](http://camel.apache.org/rx.html)</cite>
+
+Please note that Rx focusses on `push-based` events. There is no way for the network to go from a `push-based` model to a `pull-based` model like with [Reactive Streams](http://www.reactive-streams.org/), because the network has no notion of streams, so there is no upwards/downwards stream that communicates the demand and supply of data on which the network can react. The [RxJavaReactiveStreams](https://github.com/ReactiveX/RxJavaReactiveStreams) projects fills this gap. 
 
 ## Video
 - [A Playful Introduction to Rx - Erik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
