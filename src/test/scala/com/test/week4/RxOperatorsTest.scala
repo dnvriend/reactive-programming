@@ -2,9 +2,10 @@ package com.test.week4
 
 import com.test.TestSpec
 import rx.lang.scala._
+
 import scala.concurrent.duration._
 
-class HelloRxTest extends TestSpec {
+class RxOperatorsTest extends TestSpec {
 
   /**
    * Observables are asynchronous streams of data.
@@ -63,7 +64,10 @@ class HelloRxTest extends TestSpec {
     // the `.toList` returns an Observable that emits a single item, a List composed of all the items emitted by the
     // source Observable. Be careful not to use this operator on Observables that emit infinite or very large numbers
     // of items, as you do not have the option to unsubscribe.
-    observableThatEmitsNumbers.take(2).toList.toBlocking.head shouldBe List(0, 1)
+    observableThatEmitsNumbers
+      .take(2)
+      .toBlocking
+      .toList shouldBe List(0, 1)
   }
 
   it should "transform the items using .map()" in {
@@ -71,19 +75,23 @@ class HelloRxTest extends TestSpec {
       .drop(3)
       .take(2)
       .map(n => "number: " + n)
-      .toList
       .toBlocking
-      .head shouldBe List("number: 3", "number: 4")
+      .toList shouldBe List("number: 3", "number: 4")
   }
 
   it should "merge two streams" in {
     val o1 = observableThatEmitsNumbers.drop(3).take(3) // 3, 4, 5
     val o2 = observableThatEmitsNumbers.take(3)         // 0, 1, 2
-    o1.merge(o2).take(6).toList.toBlocking.head shouldBe List(0, 1, 2, 3, 4, 5)
+    o1.merge(o2)
+      .take(6)
+      .toBlocking
+      .toList shouldBe List(0, 1, 2, 3, 4, 5)
   }
 
   "An empty observable" should "emit nothing" in {
-    emptyObservable.toBlocking.headOption shouldBe empty
+    emptyObservable
+      .toBlocking
+      .headOption shouldBe empty
   }
 
   it should "return an empty list" in {
@@ -94,64 +102,113 @@ class HelloRxTest extends TestSpec {
   "A list" should "convert to Observable" in {
     val o1 = List(0, 1, 2).toObservable
     val o2 = List(3, 4, 5).toObservable
-    o1.merge(o2).take(6).toList.toBlocking.head shouldBe List(0, 1, 2, 3, 4, 5)
+    o1.merge(o2)
+      .take(6)
+      .toBlocking
+      .toList shouldBe List(0, 1, 2, 3, 4, 5)
   }
 
   it should "convert to Observable in reverse" in {
     val o1 = List(0, 1, 2).toObservable
     val o2 = List(3, 4, 5).toObservable
-    o2.merge(o1).take(6).toList.toBlocking.head shouldBe List(3, 4, 5, 0, 1, 2)
+    o2.merge(o1)
+      .take(6)
+      .toBlocking
+      .toList shouldBe List(3, 4, 5, 0, 1, 2)
   }
 
   "Observables" should "be used as follows" in {
-   val obs: Observable[Seq[Long]] =
-     observableThatEmitsNumbers // emit numbers
-       .slidingBuffer(2, 1)     // buffer 2 elements, skip 1, so (0, 1), (1, 2), (2, 3) etc
-       .take(2)                 // take 2 pairs, then unsubscribe automatically
-
-    obs.subscribe(e => log.info("{}", e))
-    waitFor(obs)
+    observableThatEmitsNumbers              // emit numbers
+       .slidingBuffer(count = 2, skip = 1)  // buffer 2 elements, skip 1, so (0, 1), (1, 2), (2, 3) etc
+       .take(3)                             // take 2 pairs, then unsubscribe automatically
+       .toBlocking
+       .toList should contain inOrder (Seq(0, 1), Seq(1, 2))
   }
 
   it should "filter" in {
-    val obs = observableThatEmitsNumbers // emit numbers
-      .filter(_ % 2 == 0)                // only emit elements that are even numbers
-      .slidingBuffer(2, 2)               // buffer 2 elements and skip 2 (0, 2), (4, 6) etc
-      .take(2)                           // take 2 pairs
-
-    obs.subscribe (e => log.info("{}", e))
-    waitFor(obs)
+    observableThatEmitsNumbers             // emit numbers
+      .filter(_ % 2 == 0)                  // only emit elements that are even numbers
+      .slidingBuffer(count = 2, skip = 2)  // buffer 2 elements and skip 2 (0, 2), (4, 6) etc
+      .take(2)                             // take 2 pairs
+      .toBlocking
+      .toList should contain inOrder (Seq(0, 2), Seq(4, 6))
   }
 
   it should "flatMap" in {
     val o1 = observableThatEmitsNumbers.take(2)
     val o2 = observableThatEmitsNumbers.take(5)
-    o1.flatMap(_ => o2).toList.toBlocking.head should not be empty // the list is non-deterministic
+    o1.flatMap(_ => o2)
+      .toBlocking
+      .toList should not be empty
+
+      // the content of the resulting list is non-deterministic.
+      // this is because, in contrary to iterables, observables are asynchronous
+      // the function you are flat-mapping over will produce its values asynchronously
   }
 
   it should "merge" in {
     val o1 = observableThatEmitsNumbers.take(2)
     val o2 = observableThatEmitsNumbers.take(5)
-    o1.merge(o2).toList.toBlocking.head shouldBe List(0, 0, 1, 1, 2, 3, 4)
+    o1.merge(o2)
+      .toBlocking
+      .toList shouldBe List(0, 0, 1, 1, 2, 3, 4)
   }
 
   it should "concat" in {
     val o1 = observableThatEmitsNumbers.take(2)
     val o2 = observableThatEmitsNumbers.take(5)
-    (o1 ++ o2).toList.toBlocking.head shouldBe List(0, 1, 0, 1, 2, 3, 4)
+    (o1 ++ o2)
+      .toBlocking
+      .toList shouldBe List(0, 1, 0, 1, 2, 3, 4)
   }
 
   it should "sum" in {
-    observableThatEmitsNumbers.take(5).sum.toBlocking.head shouldBe 10
+    observableThatEmitsNumbers
+      .take(5)
+      .sum
+      .toBlocking
+      .head shouldBe 10
   }
 
   it should "count" in {
-    observableThatEmitsNumbers.take(5).countLong.toBlocking.head shouldBe 5
+    observableThatEmitsNumbers
+      .take(5)
+      .countLong
+      .toBlocking
+      .head shouldBe 5
   }
 
   it should "zip" in {
     val o1 = observableThatEmitsNumbers.take(3)
     val o2 = observableThatEmitsNumbers.drop(5).take(5)
-    o1.zip(o2).toList.toBlocking.head shouldBe List((0, 5), (1, 6), (2, 7))
+    o1.zip(o2)
+      .toBlocking
+      .toList shouldBe List((0, 5), (1, 6), (2, 7))
+  }
+
+  // The marble diagram of the sheet is wrong, the three observables
+  // each emit only 3's, or 2's or 1's not zero and ones
+  "flattening nested streams" should "return the correct sequence" in {
+    val xs: Observable[Int] = Observable.from(List(3, 2, 1))
+    val yss: Observable[Observable[Int]] =
+      xs.map(x => Observable.interval(x seconds).map(_ => x).take(2))
+    val zs: Observable[Int] = yss.flatten
+
+    zs.toBlocking.toList match {
+      case List(1, 1, 2, 3, 2, 3) =>
+      case List(1, 2, 1, 3, 2, 3) =>
+      case u => fail("Unexpected: " + u)
+    }
+  }
+
+  "Concatenating nested streams" should "return the correct sequence" in {
+    Observable.from(List(3, 2, 1))
+      .map(x => Observable.interval(x seconds).map(_ => x).take(2))
+      .concat
+      .toBlocking
+      .toList shouldBe List(3, 3, 2, 2, 1, 1)
+
+    // note, never use concat, because it must wait until all streams terminate
+    // before the streams can be concatenated.
   }
 }

@@ -14,6 +14,10 @@ class IterableTest extends TestSpec {
     List(1, 2, 3).iterator should have ('hasNext(true))
   }
 
+  it should "contain elements" in {
+    List(Seq(0, 1), Seq(1, 2)) should contain inOrder (Seq(0, 1), Seq(1, 2))
+  }
+
   "Vector" should "be an Iterable" in {
     Vector(1, 2, 3) shouldBe an [Iterable[_]]
   }
