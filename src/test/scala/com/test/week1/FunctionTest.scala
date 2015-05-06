@@ -251,7 +251,7 @@ class FunctionTest extends TestSpec {
     // PartialFunction is not defined
     val f: PartialFunction[List[Int], String] = {
       case Nil => "empty"
-      case head :: tail => tail match { // nested PartialFunction
+      case head :: tail => tail match { // nested PartialFunction match is not exhaustive, so it will fail with List(_)
         case Nil => "empty"
       }
     }

@@ -5,15 +5,16 @@ import java.io.IOException
 import akka.actor.ActorSystem
 import akka.event.{LoggingAdapter, Logging}
 import org.scalatest.concurrent.ScalaFutures
+import org.scalatest.exceptions.TestFailedException
 import org.scalatest.{OptionValues, TryValues, FlatSpec, Matchers}
 import rx.lang.scala._
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
-import scala.util.{Try, Random}
+import scala.util.{Try, Random => Rnd}
 
 object Random {
-  def apply(): Random = new Random()
+  def apply(): Rnd = new Rnd()
 }
 
 trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues with OptionValues {
@@ -22,12 +23,23 @@ trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues w
   val log: LoggingAdapter = Logging(system, this.getClass)
   implicit val pc: PatienceConfig = PatienceConfig(timeout = 50.seconds)
 
-  implicit class PimpedByteArray(arr: Array[Byte]) {
-    def getString: String = new String(arr)
+  implicit class PimpedByteArray(self: Array[Byte]) {
+    def getString: String = new String(self)
   }
 
-  implicit class PimpedFuture[T](f: Future[T]) {
-    def toTry: Try[T] = Try(f.futureValue)
+  implicit class PimpedFuture[T](self: Future[T]) {
+    def toTry: Try[T] = Try(self.futureValue)
+  }
+
+  implicit class PimpedObservable[T](self: Observable[T]) {
+    def waitFor: Unit = {
+      self.toBlocking.toIterable.last
+    }
+  }
+
+  implicit class MustBeWord[T](self: T) {
+    def mustBe(pf: PartialFunction[T, Unit]): Unit =
+      if(!pf.isDefinedAt(self)) throw new TestFailedException("Unexpected: " + self, 0)
   }
 
   object Socket { def apply() = new Socket }
@@ -51,14 +63,5 @@ trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues w
 
     def sendToUsa(payload: Array[Byte], failed: Boolean = false): Future[Array[Byte]] =
       send(payload, "fromUsa", failed)
-  }
-
-
-   /** Subscribes to obs and waits until obs has completed. Note that if you subscribe to
-    *  obs yourself and also call waitFor(obs), all side-effects of subscribing to obs
-    *  will happen twice.
-    */
-  def waitFor[T](obs: Observable[T]): Unit = {
-    obs.toBlocking.toIterable.last
   }
 }

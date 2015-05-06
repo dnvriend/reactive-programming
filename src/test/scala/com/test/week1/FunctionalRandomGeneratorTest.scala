@@ -40,7 +40,9 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
   }
 
   it should "generate a pair of integer" in {
-    Simple.pairs.generate shouldBe a [(Integer, Integer)]
+    Simple.pairs.generate mustBe {
+      case (_: Int, _: Int) =>
+    }
   }
 
   /**
@@ -124,11 +126,15 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
   }
 
   it should "generate a pair of integer" in {
-    Advanced.pairs(Advanced.integers, Advanced.integers).generate shouldBe a [(Integer, Integer)]
+    Advanced.pairs(Advanced.integers, Advanced.integers).generate mustBe {
+      case (_: Int, _: Int) =>
+    }
   }
 
   it should "generate a list" in {
-    Advanced.lists.generate shouldBe a [List[Integer]]
+    Advanced.lists.generate mustBe {
+      case _: List[Int] =>
+    }
   }
 
   // definition of a binary tree, a tree can be either a leaf or a node
