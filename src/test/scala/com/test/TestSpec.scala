@@ -4,7 +4,7 @@ import java.io.IOException
 
 import akka.actor.ActorSystem
 import akka.event.{LoggingAdapter, Logging}
-import org.scalatest.concurrent.ScalaFutures
+import org.scalatest.concurrent.{Eventually, ScalaFutures}
 import org.scalatest.exceptions.TestFailedException
 import org.scalatest.{OptionValues, TryValues, FlatSpec, Matchers}
 import rx.lang.scala._
@@ -17,7 +17,7 @@ object Random {
   def apply(): Rnd = new Rnd()
 }
 
-trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues with OptionValues {
+trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues with OptionValues with Eventually {
   implicit val system: ActorSystem = ActorSystem("test")
   implicit val ec: ExecutionContext = system.dispatcher
   val log: LoggingAdapter = Logging(system, this.getClass)
