@@ -34,6 +34,7 @@ Please note that Rx focusses on `push-based` events. There is no way for the net
 - [Ben Christensen - "Functional Reactive Programming with RxJava](https://www.youtube.com/watch?v=_t06LRX0DV0)
 - [DevCamp 2010 Keynote - Rx: Curing your asynchronous programming blues](http://channel9.msdn.com/Blogs/codefest/DC2010T0100-Keynote-Rx-curing-your-asynchronous-programming-blues)
 - [Channel 9 - Rx Workshop: Introduction](http://channel9.msdn.com/Series/Rx-Workshop/Rx-Workshop-Introduction)
+- [An Event-driven and Reactive Future - Jonathan Worthington](https://www.youtube.com/watch?v=_VdIQTtRkb8)
 
 ## Books
 - [Free online - Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)
@@ -458,6 +459,15 @@ res3: Boolean = true
 - [Youtube - Introducing Reactive Streams](https://www.youtube.com/watch?v=khmVMvlP_QA)
 - [Youtube - Spray and Akka HTTP](https://www.youtube.com/watch?v=o5PUDI4qi10)
 - [Youtube - Reactive Stream Processing with Akka Streams](https://www.youtube.com/watch?v=XCP6zg46utU)
+- [Youtube - Netflix JavaScript Talks - Async JavaScript with Reactive Extensions](https://www.youtube.com/watch?v=XRYN2xt11Ek)
+- [Youtube - Asynchronous Programming at Netflix](https://www.youtube.com/watch?v=gawmdhCNy-A)
+- [Youtube - Building Reactive applications with Spring Reactor and the Reactive Streams standard](https://www.youtube.com/watch?v=AvwZEWu5PPc)
+- [Youtube - Typesafe - Play All Day: Reactive Streams and Play 3.0](https://www.youtube.com/watch?v=0i0RRZvARkM)
+- [Youtube - Dr. Roland Kuhn - Reactive Streams: Handling Data-Flows the Reactive Way](https://www.youtube.com/watch?v=oUnfAcwDQr4)
+- [Youtube - Reactive Streams - Tim Harper](https://www.youtube.com/watch?v=xJn2kMHUl6s)
+- [Youtube - Reactive microservices with Reactor - Stephane Maldini](https://www.youtube.com/watch?v=lzkBo3YTvAQ)
+- [Youtube - Reactive Stream Processing with kafka-rx](https://www.youtube.com/watch?v=S-Ynyel9pkk)
+- [Youtube - Technology Hour - Implementing the Reactive Manifesto with Akka - Adam Warski](https://www.youtube.com/watch?v=LXEhQPEupX8)
 
 ## Documentation
 - [Akka Streams Documentation](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/scala.html)
@@ -468,6 +478,20 @@ res3: Boolean = true
 - [Overview of built-in stages and their semantics](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/stages-overview.html#stages-overview)
 - [Integrating with Actors, external services and reactive streams](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/scala/stream-integrations.html)
 - [Reactive Streams](http://www.reactive-streams.org/)
+
+## Github
+- [Reactive RabbitMq Activator Template](https://github.com/jczuchnowski/rabbitmq-akka-stream#master)
+
+## Reactive Rabbit
+- [RabbitMq](https://www.rabbitmq.com/)
+- [GitHub - Reactive Rabbit](https://github.com/ScalaConsultants/reactive-rabbit)
+
+## AMQP
+> The Advanced Message Queuing Protocol (AMQP) is an open standard application layer protocol for message-oriented middleware. The defining features of AMQP are message orientation, queuing, routing (including point-to-point and publish-and-subscribe), reliability and security.
+-- <quote>[Wikipedia](http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol)</quote>
+
+### Books
+- [Protocol specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
 
 # Akka
 
