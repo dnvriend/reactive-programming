@@ -481,7 +481,6 @@ res3: Boolean = true
 
 ## Blogs
 - [Adam Warski - Reactive Queue with Akka Reactive Streams](http://www.warski.org/blog/2014/06/reactive-queue-with-akka-reactive-streams/)
-- 
 
 ## Slides
 - [Reactive Streams and RabbitMQ](http://www.slideshare.net/mkiedys/reactive-streams-and-rabbitmq)
@@ -489,6 +488,31 @@ res3: Boolean = true
 ## Github
 - [ScalaConsultants Team Blog - Akka Streams and RabbitMQ](http://blog.scalac.io/2014/06/23/akka-streams-and-rabbitmq.html)
 - [Reactive RabbitMq Activator Template](https://github.com/jczuchnowski/rabbitmq-akka-stream#master)
+
+## Reactive Kafka
+> Reactive Streams wrapper for Apache Kafka. -- <quote>[Reactive Kafka](https://github.com/softwaremill/reactive-kafka)</quote>
+
+- [Apache Kafka]()
+- [GitHub - Reactive Kafka](https://github.com/softwaremill/reactive-kafka)
+
+*Note:* You will need a configured [Apache Kafka](http://kafka.apache.org/) and [Apache Zookeeper](https://zookeeper.apache.org/).
+
+```scala
+import akka.actor.ActorSystem
+import akka.stream.ActorFlowMaterializer
+import akka.stream.scaladsl.{Sink, Source}
+import com.softwaremill.react.kafka.ReactiveKafka
+
+implicit val materializer = ActorFlowMaterializer()
+implicit  val actorSystem = ActorSystem("ReactiveKafka")
+
+val kafka = new ReactiveKafka(host = "localhost:9092", zooKeeperHost = "localhost:2181")
+val publisher = kafka.consume("lowercaseStrings", "groupName", new StringDecoder())
+val subscriber = kafka.publish("uppercaseStrings", "groupName", new StringEncoder())
+
+
+Source(publisher).map(_.toUpperCase).to(Sink(subscriber)).run()
+```
 
 ## Reactive Rabbit
 > Reactive Streams driver for AMQP protocol. Powered by RabbitMQ library. -- <quote>[Reactive Rabbit](https://github.com/ScalaConsultants/reactive-rabbit)</quote>
@@ -521,12 +545,27 @@ implicit val materializer = ActorFlowMaterializer()
 Source(queue).map(_.message).to(Sink(exchange)).run()
 ```
 
+## RabbitMQ
+> RabbitMQ is open source message broker software (sometimes called message-oriented middleware) that implements the Advanced Message Queuing Protocol (AMQP). The RabbitMQ server is written in the Erlang programming language and is built on the Open Telecom Platform framework for clustering and failover. Client libraries to interface with the broker are available for all major programming languages. -- <quote>[Wikipedia](http://en.wikipedia.org/wiki/RabbitMQ)</quote>
+
+- [RabbitMQ Website](http://www.rabbitmq.com/)
+
 ## AMQP
 > The Advanced Message Queuing Protocol (AMQP) is an open standard application layer protocol for message-oriented middleware. The defining features of AMQP are message orientation, queuing, routing (including point-to-point and publish-and-subscribe), reliability and security.
 -- <quote>[Wikipedia](http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol)</quote>
 
 ### Books
 - [Protocol specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
+
+## Apache Zookeeper
+> Apache ZooKeeper is an effort to develop and maintain an open-source server which enables highly reliable distributed coordination. -- <quote>[Apache Zookeeper](https://zookeeper.apache.org/)</quote>
+
+- [Apache Zookeeper Documentation](https://zookeeper.apache.org/doc/trunk/)
+
+## Apache Kafka
+> Apache Kafka is publish-subscribe messaging rethought as a distributed commit log. -- <quote>[Apache Kafka](http://kafka.apache.org/)</quote>
+
+- [Apache Kafka Documentation](http://kafka.apache.org/documentation.html)
 
 # Akka
 
