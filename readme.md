@@ -472,7 +472,7 @@ res3: Boolean = true
 ## Documentation
 - [Akka Streams Documentation](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/scala.html)
 - [Quick Start - Reactive Tweets](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/scala/stream-quickstart.html#stream-quickstart-scala)
-- [Akka Streams API 1.0-RC1](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC2/)
+- [Akka Streams API](http://doc.akka.io/api/akka-stream-and-http-experimental/1.0-RC2/)
 - [Design Principles behind Reactive Streams](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/stream-design.html#stream-design)
 - [Streams Cookbook](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/scala/stream-cookbook.html#stream-cookbook-scala)
 - [Overview of built-in stages and their semantics](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/stages-overview.html#stages-overview)
@@ -496,6 +496,8 @@ res3: Boolean = true
 # Akka
 
 ## Documentation
+- [The Akka Roadmap](https://docs.google.com/document/d/18W9-fKs55wiFNjXL9q50PYOnR7-nnsImzJqHOPPbM4E/pub)
+- [Akka News](http://akka.io/news/)
 - [Akka 2.3 -> 2.4 Migration Guide](http://doc.akka.io/docs/akka/snapshot/project/migration-guide-2.3.x-2.4.x.html)
 
 # Hystrix
