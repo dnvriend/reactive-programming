@@ -558,12 +558,32 @@ Source(queue).map(_.message).to(Sink(exchange)).run()
 
 > RabbitMQ's queues and exchanges are all configured via the AMQP protocol so a client library allows you to configure all your destinations and their behavior. ActiveMQ requires specific destination configuration because the JMS spec doesn't cover any of the administration side of things. Besides that, RabbitMQ's system configuration is Erlang-esque, while ActiveMQ is usually configured in XML. So you'll have to get used to the {tuple} and <> lovely syntax. RabbitMQ is usually installed with OS packages,  -- edit (or the `[library/rabbitmq](https://registry.hub.docker.com/u/library/rabbitmq/)` Docker image) -- while ActiveMQ distributions are archives you drop anywhere (or Maven deps you embed into something else). -- <quote>[Stackoverflow](http://stackoverflow.com/questions/7044157/switching-from-activemq-to-rabbitmq)</quote>
 
+### Video
+- [Youtube - RabbitMQ is the new king](https://www.youtube.com/watch?v=kA8rPIDa388)
+- [Youtube - RabbitMQ: Message that Just Works (Part 1)](https://www.youtube.com/watch?v=ABGMjX4K0D8)
+- [Youtube - RabbitMQ: Message that Just Works (Part 2)](https://www.youtube.com/watch?v=puMLEy5kk2s)
+- [Youtube - RabbitMQ: Message that Just Works (Part 3)](https://www.youtube.com/watch?v=bUA0fMJGQBE)
+- [Youtube - RabbitMQ: Message that Just Works (Part 4)](https://www.youtube.com/watch?v=LWVYaaBH3NY)
+- [Youtube - Reliable Messaging With RabbitMQ](https://www.youtube.com/watch?v=XjuiZM7JzPw)
+- [Youtube - What RabbitMQ Can For You](https://www.youtube.com/watch?v=4lDSwfrfM-I)
+
 ## JMS
 > The Java Message Service (JMS) API is a Java Message Oriented Middleware (MOM) API for sending messages between two or more clients. JMS is a part of the Java Platform, Enterprise Edition, and is defined by a specification developed under the Java Community Process as JSR 914. It is a messaging standard that allows application components based on the Java Enterprise Edition (Java EE) to create, send, receive, and read messages. It allows the communication between different components of a distributed application to be loosely coupled, reliable, and asynchronous. -- <quote>[Wikipedia](http://en.wikipedia.org/wiki/Java_Message_Service)</quote>
 
 ## AMQP
 > The Advanced Message Queuing Protocol (AMQP) is an open standard application layer protocol for message-oriented middleware. The defining features of AMQP are message orientation, queuing, routing (including point-to-point and publish-and-subscribe), reliability and security.
 -- <quote>[Wikipedia](http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol)</quote>
+
+## MQTT
+> MQTT (formerly Message Queue Telemetry Transport) is a publish-subscribe based "light weight" messaging protocol for use on top of the TCP/IP protocol. It is designed for connections with remote locations where a "small code footprint" is required and/or network bandwidth is limited. The Publish-Subscribe messaging pattern requires a message broker. The broker is responsible for distributing messages to interested clients based on the topic of a message. Andy Stanford-Clark and Arlen Nipper of Cirrus Link Solutions authored the first version of the protocol in 1999. -- <quote>[Wikipedia](http://en.wikipedia.org/wiki/MQTT)</quote>
+
+## STOMP
+> Simple (or Streaming) Text Oriented Message Protocol (STOMP), formerly known as TTMP, is a simple text-based protocol, designed for working with message-oriented middleware. It provides an interoperable wire format that allows STOMP clients to talk with any message broker supporting the protocol. It is thus language-agnostic, meaning a broker developed for one programming language or platform can receive communications from client software developed in another language. -- <quote>[Wikipedia](http://en.wikipedia.org/wiki/Streaming_Text_Oriented_Messaging_Protocol)</quote>
+
+## Slick with Reactive Streams Support
+> Slick is a modern database query and access library for Scala. It allows you to work with stored data almost as if you were using Scala collections while at the same time giving you full control over when a database access happens and which data is transferred. You can write your database queries in Scala instead of SQL, thus profiting from the static checking, compile-time safety and compositionality of Scala. Slick features an extensible query compiler which can generate code for different backends. -- <quote>[Slick](http://slick.typesafe.com/)</quote>
+
+- [Slick 3.0 Streaming](http://slick.typesafe.com/doc/3.0.0/dbio.html#streaming)
 
 ### Books
 - [Protocol specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
