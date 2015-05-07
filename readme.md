@@ -479,12 +479,46 @@ res3: Boolean = true
 - [Integrating with Actors, external services and reactive streams](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC2/scala/stream-integrations.html)
 - [Reactive Streams](http://www.reactive-streams.org/)
 
+## Blogs
+- [Adam Warski - Reactive Queue with Akka Reactive Streams](http://www.warski.org/blog/2014/06/reactive-queue-with-akka-reactive-streams/)
+- 
+
+## Slides
+- [Reactive Streams and RabbitMQ](http://www.slideshare.net/mkiedys/reactive-streams-and-rabbitmq)
+
 ## Github
+- [ScalaConsultants Team Blog - Akka Streams and RabbitMQ](http://blog.scalac.io/2014/06/23/akka-streams-and-rabbitmq.html)
 - [Reactive RabbitMq Activator Template](https://github.com/jczuchnowski/rabbitmq-akka-stream#master)
 
 ## Reactive Rabbit
+> Reactive Streams driver for AMQP protocol. Powered by RabbitMQ library. -- <quote>[Reactive Rabbit](https://github.com/ScalaConsultants/reactive-rabbit)</quote>
 - [RabbitMq](https://www.rabbitmq.com/)
 - [GitHub - Reactive Rabbit](https://github.com/ScalaConsultants/reactive-rabbit)
+- [Activator Template - RabbitMQ Akka Stream](https://github.com/jczuchnowski/rabbitmq-akka-stream#master)
+
+Note: You will need a RabbitMQ instance and a configured `reactive-rabbit` connection, see the [reference.conf](https://github.com/ScalaConsultants/reactive-rabbit/blob/master/src/main/resources/reference.conf) for more information. Better yet, fire up [Typesafe Activator](https://www.typesafe.com/get-started) and try out the [RabbitMQ Akka Stream](https://github.com/jczuchnowski/rabbitmq-akka-stream) Activator Template.
+
+```scala
+import akka.actor.ActorSystem
+import akka.stream.ActorFlowMaterializer
+import akka.stream.scaladsl.{Sink, Source}
+import io.scalac.amqp.Connection
+
+// streaming invoices to Accounting Department
+val connection = Connection()
+val queue = connection.consume(queue = "invoices")
+val exchange = connection
+                .publish(
+                  exchange = "accounting_department",
+                  routingKey = "invoices"
+                  )
+
+implicit val system = ActorSystem()
+implicit val materializer = ActorFlowMaterializer()
+
+// (queue) ~> (sink)
+Source(queue).map(_.message).to(Sink(exchange)).run()
+```
 
 ## AMQP
 > The Advanced Message Queuing Protocol (AMQP) is an open standard application layer protocol for message-oriented middleware. The defining features of AMQP are message orientation, queuing, routing (including point-to-point and publish-and-subscribe), reliability and security.
