@@ -492,6 +492,7 @@ res3: Boolean = true
 
 ## Reactive Rabbit
 > Reactive Streams driver for AMQP protocol. Powered by RabbitMQ library. -- <quote>[Reactive Rabbit](https://github.com/ScalaConsultants/reactive-rabbit)</quote>
+
 - [RabbitMq](https://www.rabbitmq.com/)
 - [GitHub - Reactive Rabbit](https://github.com/ScalaConsultants/reactive-rabbit)
 - [Activator Template - RabbitMQ Akka Stream](https://github.com/jczuchnowski/rabbitmq-akka-stream#master)
