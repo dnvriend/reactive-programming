@@ -41,6 +41,7 @@ Please note that Rx focusses on `push-based` events. There is no way for the net
 
 ## Docs
 - [Rx - Operators Reference](http://reactivex.io/documentation/operators.html)
+- [RxJava <-> RxScala API](http://reactivex.io/rxscala/comparison.html)
 - [ReactiveX - Portal](http://reactivex.io/)
 - [RxScala](https://github.com/ReactiveX/RxScala)
 - [RxJava](https://github.com/ReactiveX/RxJava)
@@ -50,6 +51,98 @@ Please note that Rx focusses on `push-based` events. There is no way for the net
 - [Reactive Programming in the Netflix API with RxJava](http://techblog.netflix.com/2013/02/rxjava-netflix-api.html)
 - [Lee Campbell - Reactive Extensions for .NET an Introduction](http://leecampbell.blogspot.co.uk/2010/08/reactive-extensions-for-net.html)
 - [MSDN - The Reactive Extensions (Rx)...](https://msdn.microsoft.com/en-us/data/gg577609)
+
+## Docs
+- [Scala Swing Docs 2.11.1](http://www.scala-lang.org/api/2.11.1/scala-swing/#scala.swing.package)
+
+## Hint 1
+The textValues and clicks observables:
+
+```scala
+ def textValues: Observable[String] =
+      Observable[String]({ subscriber =>
+        val eventHandler: PartialFunction[Event, Unit] = {
+          case ValueChanged(source) =>
+            subscriber.onNext(source.text)
+        }
+        field.subscribe(eventHandler)
+        Subscription {
+          field.unsubscribe(eventHandler)
+        }
+      })  
+```
+
+```scala
+ def clicks: Observable[Button] =
+      Observable[Button] ({ subscriber =>
+        val eventHandler: PartialFunction[Event, Unit] = {
+          case ButtonClicked(source) =>
+            subscriber.onNext(source)
+        }
+        button.subscribe(eventHandler)
+        Subscription {
+          button.unsubscribe(eventHandler)
+        }
+      })
+```
+
+## Hint 2
+Wikipedia API:
+
+```scala
+def sanitized: Observable[String] =
+   obs.map(_.replaceAll(" ", "_"))
+      
+def recovered: Observable[Try[T]] =
+   obs.map(Try(_)).onErrorReturn(Failure(_))
+   
+def timedOut(totalSec: Long): Observable[T] =
+  obs.take(totalSec.seconds)
+
+def concatRecovered[S](requestMethod: T => Observable[S]): Observable[Try[S]] =
+  obs.flatMap(requestMethod(_).recovered)
+```
+
+## Hint 3
+WikipediaSuggest.scala
+
+```scala
+    val searchTerms: Observable[String] =
+      searchTermField.textValues
+
+    val suggestions: Observable[Try[List[String]]] =
+      searchTerms.flatMap(wikiSuggestResponseStream).recovered
+
+    val suggestionSubscription: Subscription =
+      suggestions.observeOn(eventScheduler).subscribe { (x: Try[List[String]]) =>
+        x.map(suggestionList.listData = _)
+          .recover { case t: Throwable =>
+          status.text = t.getLocalizedMessage
+         }
+      }
+
+    val selections: Observable[String] =
+      button.clicks.flatMap { _ =>
+        suggestionList.selection.items.self match {
+               case seq: Seq[String] if seq.nonEmpty =>
+                Observable.just(seq.head)
+               case _ =>
+                Observable.empty
+          }
+      }
+
+    val pages: Observable[Try[String]] =
+      selections.flatMap(wikiPageResponseStream).recovered
+
+    val pageSubscription: Subscription =
+      pages.observeOn(eventScheduler) subscribe { (x: Try[String]) =>
+        x.map (editorpane.text = _)
+         .recover { case t: Throwable =>
+            status.text = t.getLocalizedMessage
+          }
+      }
+  }
+```
 
 # Week 3 - Futures and Composition
 > Futures provide a nice way to reason about performing many operations in parallel– in an efficient and 
