@@ -16,6 +16,19 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 - [Youtube: Erik Meijer - What does it mean to be Reactive?](https://www.youtube.com/watch?v=sTSQlYX5DU0)
 - [Youtube: Dr. Roland Kuhn - Go Reactive at the Trivento Summercamp](https://www.youtube.com/watch?v=auYuWBudVt8)
 
+# Week 5: Akka
+> Actors are very lightweight concurrent entities. They process messages asynchronously using an event-driven receive loop. Pattern matching against messages is a convenient way to express an actor's behavior. They raise the abstraction level and make it much easier to write, test, understand and maintain concurrent and/or distributed systems. You focus on workflow—how the messages flow in the system—instead of low level primitives like threads, locks and socket IO.
+-- <quote>[Akka.io](http://akka.io)</quote>
+
+## Documentation
+
+## Video
+- [Youtube - Up, Up, and Out: Scaling Software with Akka](https://www.youtube.com/watch?v=GBvtE61Wrto)
+- [Youtube - Up And Out Scaling Software With Akka - Jonas Bonér](https://www.youtube.com/watch?v=t4KxWDqGfcs)
+- [Youtube - Akka 2.0: Scaling Up & Out With Actors](https://www.youtube.com/watch?v=3jbqTxstlC4)
+- [Youtube - Above the Clouds: Introducing Akka](https://www.youtube.com/watch?v=UY3fuHebRMI)
+- [Youtube - Deep Dive into the Typesafe Reactive Platform - Akka and Scala - with Nilanjan Raychaudhuri](https://www.youtube.com/watch?v=fMWzKEN6uTY)
+
 # Week 4: Rx: Reactive Extensions
 > Users expect real time data. They want their tweets now. Their order confirmed now. They need prices accurate as of now. Their online games need to be responsive. As a developer, you demand fire-and-forget messaging. You don't want to be blocked waiting for a result. You want to have the result `pushed` to you when it is ready. Even better, when working with result sets, you want to receive individual results as they are ready. You do not want to wait for the entire set to be processed before you see the first row. The world has moved to `push`; users are waiting for us to catch up. Developers have tools to `push` data, this is easy. Developers need tools to `react to push data`. 
 -- <cite>[Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/01_WhyRx.html#WhyRx)</cite>
