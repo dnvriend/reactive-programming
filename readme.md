@@ -21,6 +21,7 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 -- <quote>[Akka.io](http://akka.io)</quote>
 
 ## Documentation
+- [Akka.io](http://akka.io)
 
 ## Video
 - [Youtube - Up, Up, and Out: Scaling Software with Akka](https://www.youtube.com/watch?v=GBvtE61Wrto)
