@@ -5,6 +5,7 @@ import java.io.IOException
 import akka.actor.{PoisonPill, ActorRef, ActorSystem}
 import akka.event.{LoggingAdapter, Logging}
 import akka.testkit.TestProbe
+import akka.util.Timeout
 import org.scalatest.concurrent.{Eventually, ScalaFutures}
 import org.scalatest.exceptions.TestFailedException
 import org.scalatest.{OptionValues, TryValues, FlatSpec, Matchers}
@@ -23,6 +24,7 @@ trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues w
   implicit val ec: ExecutionContext = system.dispatcher
   val log: LoggingAdapter = Logging(system, this.getClass)
   implicit val pc: PatienceConfig = PatienceConfig(timeout = 50.seconds)
+  implicit val timeout = Timeout(50.seconds)
 
   def probe: TestProbe = TestProbe()
 
