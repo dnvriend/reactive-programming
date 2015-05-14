@@ -7,6 +7,7 @@ import com.github.dnvriend.{HttpUtils, HttpClient}
 import com.github.dnvriend.HttpClient._
 import com.test.TestSpec
 
+import scala.concurrent.Future
 import scala.concurrent.duration._
 
 class LinkCheckerTest extends TestSpec {
@@ -162,5 +163,13 @@ class LinkCheckerTest extends TestSpec {
       case Failed(url) =>
         println(s"Failed to fetch '$url'")
     }
+    cleanup(receptionist)
+  }
+
+  it should "handle more work" in {
+    import Receptionist._
+    val receptionist = system.actorOf(Props(new Receptionist), "receptionist")
+    Future.sequence((1 to 10).map(_ => receptionist ? Get("http://www.google.com")).toList).futureValue
+    cleanup(receptionist)
   }
 }
