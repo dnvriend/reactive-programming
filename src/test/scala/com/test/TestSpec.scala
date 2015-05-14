@@ -1,19 +1,20 @@
 package com.test
 
 import java.io.IOException
+import java.util.UUID
 
-import akka.actor.{PoisonPill, ActorRef, ActorSystem}
-import akka.event.{LoggingAdapter, Logging}
+import akka.actor.{ActorRef, ActorSystem, PoisonPill}
+import akka.event.{Logging, LoggingAdapter}
 import akka.testkit.TestProbe
 import akka.util.Timeout
 import org.scalatest.concurrent.{Eventually, ScalaFutures}
 import org.scalatest.exceptions.TestFailedException
-import org.scalatest.{OptionValues, TryValues, FlatSpec, Matchers}
+import org.scalatest.{FlatSpec, Matchers, OptionValues, TryValues}
 import rx.lang.scala._
 
 import scala.concurrent.duration._
-import scala.concurrent.{ExecutionContext, Future}
-import scala.util.{Try, Random => Rnd}
+import scala.concurrent.{ExecutionContextExecutor, Future}
+import scala.util.{Random => Rnd, Try}
 
 object Random {
   def apply(): Rnd = new Rnd()
@@ -21,12 +22,14 @@ object Random {
 
 trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues with OptionValues with Eventually {
   implicit val system: ActorSystem = ActorSystem("test")
-  implicit val ec: ExecutionContext = system.dispatcher
+  implicit val ec: ExecutionContextExecutor = system.dispatcher
   val log: LoggingAdapter = Logging(system, this.getClass)
   implicit val pc: PatienceConfig = PatienceConfig(timeout = 50.seconds)
   implicit val timeout = Timeout(50.seconds)
 
   def probe: TestProbe = TestProbe()
+
+  def randomId = UUID.randomUUID.toString.take(5)
 
   def cleanup(actors: ActorRef*): Unit = {
     actors.foreach { (actor: ActorRef) =>
