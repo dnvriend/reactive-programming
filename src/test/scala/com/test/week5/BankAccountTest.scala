@@ -2,6 +2,7 @@ package com.test.week5
 
 import akka.actor.Status.Failure
 import akka.actor.{Actor, ActorRef, Props}
+import akka.event.LoggingReceive
 import akka.pattern.ask
 import com.test.TestSpec
 
@@ -20,12 +21,12 @@ class BankAccountTest extends TestSpec {
 
   it should "count" in {
     val ref: ActorRef = system.actorOf(Props(new Actor {
-      def count(num: Int): Receive = {
+      def count(num: Int): Receive = LoggingReceive {
         case _ =>
           context.become(count(num + 1))
           sender() ! num
       }
-      override def receive: Receive = count(0)
+      override def receive: Receive = LoggingReceive(count(0))
     }))
     (ref ? "").futureValue shouldBe 0
     (ref ? "").futureValue shouldBe 1
@@ -46,7 +47,7 @@ class BankAccountTest extends TestSpec {
     class BankAccount extends Actor {
       import BankAccount._
       var balance: BigInt = BigInt(0)
-      override def receive: Receive = {
+      override def receive: Receive = LoggingReceive {
         case Deposit(amount) =>
           balance += amount
           sender() ! Done(balance)
@@ -68,12 +69,12 @@ class BankAccountTest extends TestSpec {
     val account2 = system.actorOf(Props(new BankAccount))
 
     val tom = system.actorOf(Props(new Actor {
-      def awaitDeposit(client: ActorRef): Receive = {
+      def awaitDeposit(client: ActorRef): Receive = LoggingReceive {
         case Done(amount) =>
           client ! Done(amount)
           context.stop(self)
       }
-      def awaitWithdraw(to: ActorRef, amount: BigInt, client: ActorRef): Receive = {
+      def awaitWithdraw(to: ActorRef, amount: BigInt, client: ActorRef): Receive = LoggingReceive {
         case Done(_) =>
           to ! Deposit(amount)
           context.become(awaitDeposit(client))

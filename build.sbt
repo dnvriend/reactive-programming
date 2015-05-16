@@ -8,8 +8,6 @@ libraryDependencies ++= {
   val akkaVersion  = "2.3.11"
   Seq(
     "com.typesafe.akka"      %% "akka-actor"        % akkaVersion,
-    "io.spray"               %% "spray-client"      % "1.3.3",
-    "io.spray"               %% "spray-json"        % "1.3.1",
     "com.ning"               %  "async-http-client" % "1.7.19",
     "org.jsoup"              % "jsoup"              % "1.8.1",
     "io.reactivex"           %% "rxscala"           % "0.24.1",
@@ -22,3 +20,4 @@ libraryDependencies ++= {
 
 fork in Test := true
 
+parallelExecution in Test := false

@@ -1,13 +1,14 @@
 package com.test.week5
 
 import akka.actor.{Actor, Props}
+import akka.event.LoggingReceive
 import com.test.TestSpec
 
 class CounterTest extends TestSpec {
 
   class Counter extends Actor {
 
-    def counter(n: Int): Receive = {
+    def counter(n: Int): Receive = LoggingReceive {
       case "incr" => context.become(counter(n + 1))
       case "get" => sender() ! n
     }

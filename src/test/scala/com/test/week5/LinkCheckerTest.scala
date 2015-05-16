@@ -2,6 +2,7 @@ package com.test.week5
 
 import akka.actor.Status.Failure
 import akka.actor._
+import akka.event.LoggingReceive
 import akka.pattern._
 import com.github.dnvriend.{HttpUtils, HttpClient}
 import com.github.dnvriend.HttpClient._
@@ -21,21 +22,17 @@ class LinkCheckerTest extends TestSpec {
 
     HttpClient() get url pipeTo self
 
-    override def receive: Receive = {
+    override def receive: Receive = LoggingReceive {
       case body: String =>
-        log.info("[BODY: STRING]")
         HttpUtils.findLinks(body).foreach { links =>
           for(link <- links) {
-            log.info("{}", link)
             context.parent ! Controller.Check(link, depth)
           }
         }
         stop()
       case Failure(t) =>
-        log.info("[FAILURE]: {}", t.getMessage)
         stop()
       case Abort =>
-        log.info("[ABORT]")
         stop()
     }
 
@@ -66,21 +63,17 @@ class LinkCheckerTest extends TestSpec {
     context.system.scheduler.scheduleOnce(10.seconds, self, ReceiveTimeout)
     context.setReceiveTimeout(10.seconds)
 
-    override def receive = {
+    override def receive = LoggingReceive {
       case Check(url, depth) =>
-        log.info("[CHECK]: url: {}, depth: {}", url, depth)
         if(!cache(url) && depth > 0)
           children += context.actorOf(Props(new Getter(url, depth - 1)), s"getter-$randomId")
         cache += url
       case Getter.Done =>
-        log.info("[DONE]")
         children -= sender
         if(children.isEmpty) {
-          log.info("[DONE], sending result: {}", cache)
           context.parent ! Result(cache)
         }
       case ReceiveTimeout =>
-        log.info("[RECEIVE_TIMEOUT]")
         children.foreach { _ ! Getter.Abort }
     }
 
@@ -103,7 +96,7 @@ class LinkCheckerTest extends TestSpec {
 
     var reqNo = 0
 
-    def runNext(queue: Vector[Job]): Receive = {
+    def runNext(queue: Vector[Job]): Receive = LoggingReceive {
       reqNo += 1
       if(queue.isEmpty) {
         log.info("Queue is empty, waiting for jobs")
@@ -117,7 +110,7 @@ class LinkCheckerTest extends TestSpec {
       }
     }
 
-    def enqueueJob(queue: Vector[Job], job: Job): Receive = {
+    def enqueueJob(queue: Vector[Job], job: Job): Receive = LoggingReceive {
       if (queue.size > 3) {
         log.info("Cannot accept any more jobs: {}", job)
         sender ! Failed(job.url) // cannot accept any more jobs
@@ -128,20 +121,18 @@ class LinkCheckerTest extends TestSpec {
       }
     }
 
-    val waiting: Receive = {
+    val waiting: Receive = LoggingReceive {
       case Get(url) =>
         context.become(runNext(Vector(Job(sender(), url))))
     }
 
-    def running(queue: Vector[Job]): Receive = {
+    def running(queue: Vector[Job]): Receive = LoggingReceive {
       case Controller.Result(links) =>
-        log.info("[RESULT]: {}", links)
         val job = queue.head
         job.client ! Result(job.url, links)
         context.stop(sender())
         context.become(runNext(queue.tail))
       case Get(url) =>
-        log.info("[GET]: {}", url)
         context.become(enqueueJob(queue, Job(sender(), url)))
     }
 
