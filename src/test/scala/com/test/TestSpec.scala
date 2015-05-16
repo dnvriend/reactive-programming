@@ -27,10 +27,19 @@ trait TestSpec extends FlatSpec with Matchers with ScalaFutures with TryValues w
   implicit val pc: PatienceConfig = PatienceConfig(timeout = 50.seconds)
   implicit val timeout = Timeout(50.seconds)
 
+  /**
+   * TestKit-based probe which allows sending, reception and reply.
+   */
   def probe: TestProbe = TestProbe()
 
+  /**
+   * Returns a random UUID
+   */
   def randomId = UUID.randomUUID.toString.take(5)
 
+  /**
+   * Sends the PoisonPill command to an actor and waits for it to die
+   */
   def cleanup(actors: ActorRef*): Unit = {
     actors.foreach { (actor: ActorRef) =>
       actor ! PoisonPill
