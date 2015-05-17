@@ -34,7 +34,7 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 - [Jonas Boner - The Road to Akka Cluster and Beyond](http://www.slideshare.net/jboner/the-road-to-akka-cluster-and-beyond)
 
 ## Hint 1
-The [Stash trait](http://doc.akka.io/docs/akka/snapshot/scala/actors.html#Stash) enables an actor to temporarily stash away messages that can not or should not be handled using the actor's current behavior. Upon changing the actor's message handler, i.e., right before invoking context.become or context.unbecome, all stashed messages can be "unstashed", thereby prepending them to the actor's mailbox. This way, the stashed messages can be processed in the same order as they have been received originally.
+The [Stash trait](http://doc.akka.io/docs/akka/snapshot/scala/actors.html#Stash) enables an actor to temporarily stash away messages that can not or should not be handled using the actor's current behavior. Upon changing the actor's message handler, i.e., right before invoking `context.become` or `context.unbecome`, all stashed messages can be "unstashed", thereby prepending them to the actor's mailbox. This way, the stashed messages can be processed in the same order as they have been received originally. To stash messages call `stash()`, to unstash call `unstashAll()`.
 
 Use it instead of the `Queue`.
 
