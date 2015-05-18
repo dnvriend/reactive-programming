@@ -29,7 +29,7 @@ Akka persistence uses persistence plugins to store the `event` journal entries o
 - [GitHub - akka-persistence-jdbc by myself](https://github.com/dnvriend/akka-persistence-jdbc)
 - [GitHub - akka-persistence-inmemory by myself](https://github.com/dnvriend/akka-persistence-inmemory)
 - [GitHub - akka-persistence-cassandra by Martin Krasser](https://github.com/krasserm/akka-persistence-cassandra/)
-- [GitHub - akka-persistence-kafka by Martin Krasser(https://github.com/krasserm/akka-persistence-kafka/)
+- [GitHub - akka-persistence-kafka by Martin Krasser](https://github.com/krasserm/akka-persistence-kafka/)
 
 ## Video
 - [Youtube - Intro to Akka persistence with Patrik Nordwall](https://www.youtube.com/watch?v=r5lecCBazvE)
