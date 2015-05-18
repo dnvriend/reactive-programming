@@ -34,6 +34,9 @@ Akka persistence uses persistence plugins to store the `event` journal entries o
 ## Video
 - [Youtube - Intro to Akka persistence with Patrik Nordwall](https://www.youtube.com/watch?v=r5lecCBazvE)
 
+## Blogs
+- [Xebia - Raymond Roestenburg - Supervisor Strategy Using An Exponential Back Off Algorithm](http://blog.xebia.com/2012/12/12/exponential-backoff-with-akka-actors/)
+
 # Week 5: The Actor Model using Akka
 > Actors are very lightweight concurrent entities. They process messages asynchronously using an event-driven receive loop. Pattern matching against messages is a convenient way to express an actor's behavior. They raise the abstraction level and make it much easier to write, test, understand and maintain concurrent and/or distributed systems. You focus on workflow—how the messages flow in the system—instead of low level primitives like threads, locks and socket IO.
 -- <quote>[Akka.io](http://akka.io)</quote>
