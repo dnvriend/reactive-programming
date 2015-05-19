@@ -27,7 +27,7 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 Akka persistence uses persistence plugins to store the `event` journal entries or `snapshot` 'current-state' entries into a persistence store or log. There are a lot of plugins available on the [Akka Community Projects](http://akka.io/community/) site, the most notable ones are:
 
 - [GitHub - akka-persistence-jdbc by myself](https://github.com/dnvriend/akka-persistence-jdbc)
-- [GitHub - akka-persistence-inmemory by myself](https://github.com/dnvriend/akka-persistence-inmemory)
+- [GitHub - akka-persistence-inmemory by myself](https://github.com/dnvriend/akka-persistence-inmemory) - Handy for testing purposes
 - [GitHub - akka-persistence-cassandra by Martin Krasser](https://github.com/krasserm/akka-persistence-cassandra/)
 - [GitHub - akka-persistence-kafka by Martin Krasser](https://github.com/krasserm/akka-persistence-kafka/)
 
