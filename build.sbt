@@ -11,7 +11,7 @@ libraryDependencies ++= {
   Seq(
     "com.typesafe.akka"      %% "akka-actor"                     % akkaVersion,
     "com.typesafe.akka"      %% "akka-persistence-experimental"  % akkaVersion,
-    "com.github.dnvriend"    %% "akka-persistence-inmemory"      % "1.0.1",
+    "com.github.dnvriend"    %% "akka-persistence-inmemory"      % "1.0.2",
     "com.ning"               %  "async-http-client"              % "1.7.19",
     "org.jsoup"              %  "jsoup"                          % "1.8.1",
     "io.reactivex"           %% "rxscala"                        % "0.24.1",
