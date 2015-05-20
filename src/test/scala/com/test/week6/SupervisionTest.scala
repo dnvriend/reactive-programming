@@ -1,12 +1,12 @@
 package com.test.week6
 
-import akka.actor.SupervisorStrategy.{Restart, Resume, Stop}
 import akka.actor._
 import akka.event.LoggingReceive
+import akka.pattern.ask
 import akka.testkit.TestProbe
 import com.test.TestSpec
+
 import scala.concurrent.duration._
-import akka.pattern.ask
 
 class SupervisionTest extends TestSpec {
 
@@ -46,7 +46,7 @@ class SupervisionTest extends TestSpec {
   "SupervisorStrategy" should "resume the worker, state should not change, so should be 1" in {
     val tp = probe
     val sup = createSupervisor(tp) { OneForOneStrategy() {
-        case t: RuntimeException => Resume
+        case t: RuntimeException => SupervisorStrategy.Resume
       }
     }
     sup ! Count
@@ -61,7 +61,7 @@ class SupervisionTest extends TestSpec {
   it should "restart the worker, so the worker instance has been replaced, and state should be 0 again" in {
     val tp = probe
     val sup = createSupervisor(tp) { OneForOneStrategy() {
-      case t: RuntimeException => Restart
+      case t: RuntimeException => SupervisorStrategy.Restart
     }
     }
     sup ! Count
@@ -75,7 +75,7 @@ class SupervisionTest extends TestSpec {
   it should "stop the worker, so worker in not there anymore and should not answer" in {
     val tp = probe
     val sup = createSupervisor(tp) { OneForOneStrategy() {
-        case t: RuntimeException => Stop
+        case t: RuntimeException => SupervisorStrategy.Stop
       }
     }
     sup ! Command (() => throw new RuntimeException("stop"))

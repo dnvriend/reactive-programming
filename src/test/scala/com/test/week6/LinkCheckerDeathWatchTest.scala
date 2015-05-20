@@ -1,19 +1,18 @@
-package com.test.week5
+package com.test.week6
 
 import akka.actor.Status.Failure
 import akka.actor._
 import akka.event.LoggingReceive
 import akka.pattern._
-import com.github.dnvriend.{HttpUtils, HttpClient}
 import com.github.dnvriend.HttpClient._
+import com.github.dnvriend.{HttpClient, HttpUtils}
 import com.test.TestSpec
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-class LinkCheckerTest extends TestSpec {
+class LinkCheckerDeathWatchTest extends TestSpec {
   object Getter {
-    case object Done
     case object Abort
   }
   class Getter(url: String, depth: Int) extends Actor with ActorLogging {
@@ -22,31 +21,18 @@ class LinkCheckerTest extends TestSpec {
 
     HttpClient() get url pipeTo self
 
+    def stop(): Unit = context.stop(self)
+
     override def receive: Receive = LoggingReceive {
       case body: String =>
         HttpUtils.findLinks(body).foreach { links =>
-          for(link <- links) {
+          for(link <- links)
             context.parent ! Controller.Check(link, depth)
-          }
         }
         stop()
-      case Failure(t) =>
-        stop()
-      case Abort =>
-        stop()
+      case Failure(t)   => stop()
+      case Abort        => stop()
     }
-
-    def stop(): Unit = {
-      context.parent ! Getter.Done
-      context.stop(self)
-    }
-
-    override def preStart(): Unit =
-      log.info("Starting: {}", self.path)
-
-    override def postStop(): Unit =
-      log.info("Stopping: {}", self.path)
-
   }
 
   object Controller {
@@ -58,29 +44,25 @@ class LinkCheckerTest extends TestSpec {
     import Controller._
 
     var cache = Set.empty[String] // stores the result url
-    var children = Set.empty[ActorRef]
 
     context.system.scheduler.scheduleOnce(10.seconds, self, ReceiveTimeout)
+
+    override def supervisorStrategy: SupervisorStrategy = OneForOneStrategy(maxNrOfRetries = 5) {
+      case _: Exception => SupervisorStrategy.Restart
+    }
 
     override def receive = LoggingReceive {
       case Check(url, depth) =>
         if(!cache(url) && depth > 0)
-          children += context.actorOf(Props(new Getter(url, depth - 1)), s"getter-$randomId")
+          context.watch(context.actorOf(Props(new Getter(url, depth - 1))))
         cache += url
-      case Getter.Done =>
-        children -= sender
-        if(children.isEmpty) {
+
+      case Terminated(_) =>
+        if(context.children.isEmpty)
           context.parent ! Result(cache)
-        }
-      case ReceiveTimeout =>
-        children.foreach { _ ! Getter.Abort }
+
+      case ReceiveTimeout => context.children foreach context.stop
     }
-
-    override def preStart(): Unit =
-      log.info("Starting: {}", self.path)
-
-    override def postStop(): Unit =
-      log.info("Stopping: {}", self.path)
   }
 
   object Receptionist {
@@ -136,12 +118,6 @@ class LinkCheckerTest extends TestSpec {
     }
 
     override def receive = waiting
-
-    override def preStart(): Unit =
-      log.info("Starting: {}", self.path)
-
-    override def postStop(): Unit =
-      log.info("Stopping: {}", self.path)
   }
 
   "Receptionist" should "place a request and get a respond" in {
