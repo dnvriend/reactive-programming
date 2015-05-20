@@ -4,5 +4,7 @@
 /project/project/
 /project/target/
 /target/
+/journal/
+/snapshot/
 .idea
 *.iml
