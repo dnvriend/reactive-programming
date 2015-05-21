@@ -23,6 +23,16 @@ class AtLeastOnceDeliveryTest extends TestSpec {
    * - Acknowledgement means taking note of the receipt of the confirmation
    */
 
+  /**
+   * - Performing the effect and persisting that it was done cannot be atomic
+   *   - Perform it before persisting for at-least-once semantic
+   *   - Perform it after  persisting for at-most-once  semantic
+   *
+   * - The choice needs to be made based on the underlying business model.
+   * - A processing is idempotent then using at-least-once semantic achieves
+   *   effectively exactly-once processing
+   */
+
   sealed trait Protocol
   case class PublishPost(text: String, id: Long) extends Protocol
   case class PostPublished(id: Long) extends Protocol
