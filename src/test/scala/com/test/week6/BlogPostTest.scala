@@ -55,15 +55,59 @@ class BlogPostTest extends TestSpec {
     }
   }
 
+  class UserActorAsync(pid: Long) extends PersistentActor {
+    override val persistenceId: String = "user-" + pid // must be a stable id
+
+    // state is encapsulated in a single case class that has all
+    // logic to update the state
+    var state = State(Vector.empty[String], disabled = false)
+
+    def updateState(event: Event): Unit = {
+      state = state.update(event)
+    }
+
+    override def receiveRecover: Receive = LoggingReceive {
+      case event: Event => updateState(event)
+    }
+
+    override def receiveCommand: Receive = LoggingReceive {
+      case NewPost(_, id) if state.disabled =>
+        sender() ! BlogNotPosted(id, "quota reached")
+
+      case NewPost(text, id) if !state.disabled =>
+        val created = PostCreated(text)
+        updateState(created)
+        updateState(QuotaReached)
+        persistAsync(created)(_ => sender() ! BlogPosted(id))
+        persistAsync(QuotaReached)(_ => ())
+        persist(QuotaReached)(updateState)
+    }
+  }
+
   def createUser(pid: Long) =
     system.actorOf(Props(new UserActor(pid)))
 
-  "BlogPost" should "have lame quota size" in {
+  "BlogPost" should "store post and remember state" in {
     var user1 = createUser(1)
     (user1 ? NewPost("foo", 1)).futureValue shouldBe BlogPosted(1)
     (user1 ? NewPost("bar", 2)).futureValue shouldBe BlogNotPosted(2, "quota reached")
     user1 ! PoisonPill
     user1 = createUser(1)
     (user1 ? NewPost("bar", 2)).futureValue shouldBe BlogNotPosted(2, "quota reached")
+  }
+
+  "AsyncBlogPost" should "store post and remember state" in {
+    var user1 = createUser(1)
+    // because of async processing of events, the responses can be out of order
+    val possilbleResponses: PartialFunction[Any, Unit] = {
+      case BlogPosted(1) =>
+      case BlogNotPosted(1, "quota reached") =>
+      case BlogNotPosted(2, "quota reached") =>
+    }
+    (user1 ? NewPost("foo", 1)).futureValue mustBe possilbleResponses
+    (user1 ? NewPost("bar", 2)).futureValue mustBe possilbleResponses
+    user1 ! PoisonPill
+    user1 = createUser(1)
+    (user1 ? NewPost("bar", 2)).futureValue mustBe possilbleResponses
   }
 }
