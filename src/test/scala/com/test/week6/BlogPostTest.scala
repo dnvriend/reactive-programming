@@ -6,18 +6,14 @@ import akka.pattern.ask
 import akka.persistence.PersistentActor
 import com.test.TestSpec
 
-sealed trait Event
-
-case class PostCreated(text: String) extends Event
-
-case object QuotaReached extends Event
-
 class BlogPostTest extends TestSpec {
 
+  sealed trait Event
+  case class PostCreated(text: String) extends Event
+  case object QuotaReached extends Event
+
   case class NewPost(text: String, id: Long)
-
   case class BlogPosted(id: Long)
-
   case class BlogNotPosted(id: Long, reason: String)
 
   case class State(posts: Vector[String], disabled: Boolean) {
