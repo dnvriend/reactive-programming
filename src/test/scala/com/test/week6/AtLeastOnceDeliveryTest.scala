@@ -74,8 +74,10 @@ class AtLeastOnceDeliveryTest extends TestSpec {
 
     override def receiveCommand: Receive = LoggingReceive {
       case PublishPost(text, id) if id > expectedId =>
+        // ignore the message, the sender will retry
 
       case PublishPost(text, id) if id < expectedId =>
+        // already received, just confirm
         sender() ! PostPublished(id)
 
       case PublishPost(text, id) if id == expectedId =>
