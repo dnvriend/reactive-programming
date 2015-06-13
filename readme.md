@@ -15,6 +15,10 @@ These are my notes and study guide how I approach studying `Principles of Reacti
 
 - [Youtube: Erik Meijer - What does it mean to be Reactive?](https://www.youtube.com/watch?v=sTSQlYX5DU0)
 - [Youtube: Dr. Roland Kuhn - Go Reactive at the Trivento Summercamp](https://www.youtube.com/watch?v=auYuWBudVt8)
+- [Slideware: Lutz Hühnken - A Pragmatic View of Reactive](http://www.slideshare.net/lutzh/a-pragmatic-view-of-reactive)
+- [Slideware: Jonas Boner - Life Beyond the illusion of present](http://www.slideshare.net/jboner/life-beyond-the-illusion-of-present)
+- [Slideware: Takipi - Advanced Production Debugging](http://www.slideshare.net/Takipi/advanced-production-debugging)
+- [Mathias - Reactive Streams: The Now](http://spray.io/scaladays/2015/#/)
 
 # Week 6: Supervision and Akka Persistence
 > `Supervision` describes a dependency relationship between actors: the supervisor delegates tasks to subordinates and therefore must respond to their failures.
