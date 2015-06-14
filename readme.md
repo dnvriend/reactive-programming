@@ -37,6 +37,8 @@ Akka persistence uses persistence plugins to store the `event` journal entries o
 
 ## Video
 - [Parleys - Heiko Seeberger - Akka Overview and State Machines](https://www.parleys.com/tutorial/heiko-seeberger-akka-overview-state-machines)
+- [Parleys - Nicolas Jozwiak - Supervise your Akka actors](https://www.parleys.com/tutorial/supervise-your-akka-actors)
+- [Parleys - Konrad Malawski - Resilient applications with Akka Persistence](https://www.parleys.com/tutorial/resilient-applications-akka-persistence)
 - [Youtube - Intro to Akka persistence with Patrik Nordwall](https://www.youtube.com/watch?v=r5lecCBazvE)
 
 ## Blogs
