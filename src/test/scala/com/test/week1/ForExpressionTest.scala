@@ -100,7 +100,7 @@ class ForExpressionTest extends TestSpec {
       for {
         b1 ← books
         b2 ← books
-        if b1 != b2;
+        if b1 != b2
         a1 ← b1.authors
         a2 ← b2.authors
         if a1 == a2
@@ -120,5 +120,18 @@ class ForExpressionTest extends TestSpec {
         )
     }
     removeDuplicates(result) shouldBe List("Ullman, Jeffrey")
+  }
+
+  it should "allow for nested for expressions" in {
+    val xs = List(1, 2, 3)
+    val xy = List("1", "2", "3")
+
+    val result: List[(Int, Int)] = for {
+      x ← xs
+      y ← for (y ← xy) yield y.toInt
+      if x <= 2 && y <= 2
+    } yield (x, y)
+
+    result shouldBe List((1, 1), (1, 2), (2, 1), (2, 2))
   }
 }
