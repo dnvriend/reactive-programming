@@ -52,10 +52,12 @@ class AtLeastOnceDeliveryTest extends TestSpec {
   // but the publisher will only do so, when it receives the PublishPost command
 
   class UserActor(subscriber: ActorPath) extends PersistentActor with AtLeastOnceDelivery {
+    override def persistenceId: String = "userActor"
+
     override def receiveCommand: Receive = LoggingReceive {
       case NewPost(text, id) =>
         persist(PostCreated(text)) { e =>
-          deliver(subscriber, PublishPost(text, _))
+          deliver(subscriber)(PublishPost(text, _))
           sender() ! BlogPosted(id)
         }
       case PostPublished(id) =>
@@ -64,7 +66,7 @@ class AtLeastOnceDeliveryTest extends TestSpec {
     }
 
     override def receiveRecover: Receive = LoggingReceive {
-      case PostCreated(text) => deliver(subscriber, PublishPost(text, _))
+      case PostCreated(text) => deliver(subscriber)(PublishPost(text, _))
       case PostPublished(id) => confirmDelivery(id)
     }
   }
