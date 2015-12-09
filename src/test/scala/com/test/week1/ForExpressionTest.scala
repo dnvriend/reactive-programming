@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week1
 
 import com.test.TestSpec
@@ -21,11 +37,12 @@ class ForExpressionTest extends TestSpec {
     // and the name of the child
     type MotherAndChildName = (String, String)
     val xs: List[MotherAndChildName] =
-      for { p <- persons
-          if !p.isMale
-          c <- p.children
+      for {
+        p ← persons
+        if !p.isMale
+        c ← p.children
       } yield (p.name, c.name)
-    xs shouldBe List(("Julie","Lara"), ("Julie", "Bob"))
+    xs shouldBe List(("Julie", "Lara"), ("Julie", "Bob"))
   }
 
   case class Book(title: String, authors: String*)
@@ -55,9 +72,10 @@ class ForExpressionTest extends TestSpec {
 
   it should "find the title of all books whose author's last name is Gosling" in {
     val result =
-      for { b <- books
-            a <- b.authors
-            if a.startsWith("Gosling")
+      for {
+        b ← books
+        a ← b.authors
+        if a.startsWith("Gosling")
       } yield b.title
 
     result shouldBe List("The Java Language Specification")
@@ -65,8 +83,9 @@ class ForExpressionTest extends TestSpec {
 
   it should "find the titles of all books that have the string 'Program' in their title" in {
     val result =
-      for { b <- books
-            if b.title.indexOf("Program") >= 0
+      for {
+        b ← books
+        if b.title.indexOf("Program") >= 0
       } yield b.title
 
     result shouldBe List(
@@ -78,23 +97,25 @@ class ForExpressionTest extends TestSpec {
 
   it should "find the names of all authors that have written at least two books in the database" in {
     val result =
-      for { b1 <- books
-            b2 <- books
-            if b1 != b2;
-            a1 <- b1.authors
-            a2 <- b2.authors
-            if a1 == a2
+      for {
+        b1 ← books
+        b2 ← books
+        if b1 != b2;
+        a1 ← b1.authors
+        a2 ← b2.authors
+        if a1 == a2
       } yield a1
 
     result shouldBe List("Ullman, Jeffrey", "Ullman, Jeffrey")
 
     // let's remove the double entry
     def removeDuplicates(xs: List[String]): List[String] = xs match {
-      case Nil => xs
-      case head :: tail =>
+      case Nil ⇒ xs
+      case head :: tail ⇒
         head :: removeDuplicates(
-          for { x <- tail
-                if x != xs.head
+          for {
+            x ← tail
+            if x != xs.head
           } yield x
         )
     }

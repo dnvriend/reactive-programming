@@ -1,6 +1,22 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week1
 
-import com.test.{Random, TestSpec}
+import com.test.{ Random, TestSpec }
 import org.scalatest.exceptions.TestFailedException
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
@@ -28,20 +44,20 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
   }
 
   "Random" should "create random numbers" in {
-    Random().nextInt() shouldBe a [Integer]
+    Random().nextInt() shouldBe a[Integer]
   }
 
   "SimpleGenerator" should "generate a random number" in {
-    Simple.integers.generate shouldBe a [Integer]
+    Simple.integers.generate shouldBe a[Integer]
   }
 
   it should "generate a boolean" in {
-    Simple.booleans.generate shouldBe a [java.lang.Boolean]
+    Simple.booleans.generate shouldBe a[java.lang.Boolean]
   }
 
   it should "generate a pair of integer" in {
     Simple.pairs.generate mustBe {
-      case (_: Int, _: Int) =>
+      case (_: Int, _: Int) ⇒
     }
   }
 
@@ -50,15 +66,15 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
    */
   object Advanced {
     trait Generator[+T] {
-      self =>
+      self ⇒
 
       def generate: T
 
-      def map[S](f: T => S): Generator[S] = new Generator[S] {
+      def map[S](f: T ⇒ S): Generator[S] = new Generator[S] {
         def generate: S = f(self.generate)
       }
 
-      def flatMap[S](f: T => Generator[S]): Generator[S] = new Generator[S] {
+      def flatMap[S](f: T ⇒ Generator[S]): Generator[S] = new Generator[S] {
         override def generate: S = f(self.generate).generate
       }
     }
@@ -71,11 +87,11 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
     }
 
     def choose(lo: Int, hi: Int): Generator[Int] =
-      for(x <- integers) yield lo + x % (hi - lo)
+      for (x ← integers) yield lo + x % (hi - lo)
 
     // the T* is the varargs syntax you know of Java
     def oneOf[T](xs: T*): Generator[T] =
-      for (idx <- choose(0, xs.length)) yield xs(idx)
+      for (idx ← choose(0, xs.length)) yield xs(idx)
 
     def integers: Generator[Int] = new Generator[Int] {
       override def generate: Int = Random().nextInt()
@@ -90,50 +106,50 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
     }
 
     def lists: Generator[List[Int]] = for {
-      isEmpty <- booleans
-      list <- if (isEmpty) emptyList else nonEmptyList
+      isEmpty ← booleans
+      list ← if (isEmpty) emptyList else nonEmptyList
     } yield list
 
     def emptyList: Generator[List[Int]] = single(List.empty[Int])
 
     def nonEmptyList: Generator[List[Int]] = for {
-      head <- integers
-      tail <- lists
+      head ← integers
+      tail ← lists
     } yield head :: tail
 
     def leafs: Generator[Leaf] = for {
-      x <- integers
+      x ← integers
     } yield Leaf(x)
 
     def nodes: Generator[Node] = for {
-      l <- trees
-      r <- trees
+      l ← trees
+      r ← trees
     } yield Node(l, r)
 
     // it generates either a leaf or a node
     def trees: Generator[Tree] = for {
-      isLeaf <- booleans
-      tree <- if (isLeaf) leafs else nodes
+      isLeaf ← booleans
+      tree ← if (isLeaf) leafs else nodes
     } yield tree
   }
 
   "Advanced" should "generate a random number" in {
-    Advanced.integers.generate shouldBe a [Integer]
+    Advanced.integers.generate shouldBe a[Integer]
   }
 
   it should "generate a boolean" in {
-    Advanced.booleans.generate shouldBe a [java.lang.Boolean]
+    Advanced.booleans.generate shouldBe a[java.lang.Boolean]
   }
 
   it should "generate a pair of integer" in {
     Advanced.pairs(Advanced.integers, Advanced.integers).generate mustBe {
-      case (_: Int, _: Int) =>
+      case (_: Int, _: Int) ⇒
     }
   }
 
   it should "generate a list" in {
     Advanced.lists.generate mustBe {
-      case _: List[Int] =>
+      case _: List[Int] ⇒
     }
   }
 
@@ -145,11 +161,11 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
   case class Leaf(x: Int) extends Tree
 
   it should "generate trees" in {
-    Advanced.trees.generate shouldBe a [Tree]
+    Advanced.trees.generate shouldBe a[Tree]
   }
 
-  def test[T](g: Advanced.Generator[T], numTimes: Int = 100)(test: T => Boolean): Unit = {
-    for(i <- 0 until numTimes) {
+  def test[T](g: Advanced.Generator[T], numTimes: Int = 100)(test: T ⇒ Boolean): Unit = {
+    for (i ← 0 until numTimes) {
       val value: T = g.generate
       assert(test(value), s"test failed for $value")
     }
@@ -159,21 +175,21 @@ class FunctionalRandomGeneratorTest extends TestSpec with GeneratorDrivenPropert
   "testing list adding two list must always be greater" should "always fail" in {
     intercept[TestFailedException] {
       test(Advanced.pairs(Advanced.lists, Advanced.lists)) {
-        case (xs, xy) => (xs ++ xy).length > xs.length
+        case (xs, xy) ⇒ (xs ++ xy).length > xs.length
       }
     }
   }
 
   it should "aways fail using forAll" in {
     intercept[TestFailedException] {
-      forAll { (l1: List[Int], l2: List[Int]) =>
+      forAll { (l1: List[Int], l2: List[Int]) ⇒
         l1.size + l2.size should not be (l1 ++ l2).size
       }
     }
   }
 
   it should "always succeed forAll" in {
-    forAll { (l1: List[Int], l2: List[Int]) =>
+    forAll { (l1: List[Int], l2: List[Int]) ⇒
       l1.size + l2.size shouldBe (l1 ++ l2).size
     }
   }

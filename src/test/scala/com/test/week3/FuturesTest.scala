@@ -1,9 +1,25 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week3
 
 import com.test.TestSpec
 import scala.concurrent.duration._
 import scala.concurrent._
-import scala.util.{Failure, Success}
+import scala.util.{ Failure, Success }
 
 class FuturesTest extends TestSpec {
 
@@ -39,7 +55,7 @@ class FuturesTest extends TestSpec {
    *
    * It is inherited from TestSpec
    */
-//  implicit val executionContext: ExecutionContext = system.dispatcher
+  //  implicit val executionContext: ExecutionContext = system.dispatcher
 
   /**
    * A Future is an object holding a value which may become available at some point. This value is usually the result of
@@ -65,7 +81,7 @@ class FuturesTest extends TestSpec {
    */
 
   "FutureConcept" should "complete with value 2, sometime in the future" in {
-    val future: Future[Int] = Future { 1 }.map(_*2)
+    val future: Future[Int] = Future { 1 }.map(_ * 2)
     future.isReadyWithin(1.minute) shouldBe true
     future.futureValue shouldBe 2
   }
@@ -76,7 +92,7 @@ class FuturesTest extends TestSpec {
    */
 
   "Future waiting" should "block the thread until the result is available" in {
-    val future: Future[Int] = Future(1).map( _ * 2 )
+    val future: Future[Int] = Future(1).map(_ * 2)
     val result: Int = Await.result(future, 1.minute)
     result shouldBe 2
   }
@@ -88,11 +104,11 @@ class FuturesTest extends TestSpec {
    */
 
   "Future callback" should "block the thread, until the thread is ready and test using callback" in {
-    val future: Future[Int] = Future(1).map( _ * 2 )
+    val future: Future[Int] = Future(1).map(_ * 2)
     // the onComplete is the callback
     future.onComplete {
-      case Success(n) => n shouldBe 2
-      case Failure(t) => fail(t)
+      case Success(n) ⇒ n shouldBe 2
+      case Failure(t) ⇒ fail(t)
     }
     Await.ready(future, 1.minute)
     // block the test thread to let the future evaluate
@@ -106,31 +122,31 @@ class FuturesTest extends TestSpec {
   "Failed future" should "complete with throwable" in {
     val future: Future[Int] = Future { 2 / 0 }
     future.onComplete {
-      case Failure(t: ArithmeticException) =>
-      case Failure(t) => fail(t)
-      case Success(n) => fail("Should not complete successfully")
+      case Failure(t: ArithmeticException) ⇒
+      case Failure(t)                      ⇒ fail(t)
+      case Success(n)                      ⇒ fail("Should not complete successfully")
     }
     Await.ready(future, 1.minute)
     Thread.sleep(100)
   }
 
   "Failed future" should "recover with a default value" in {
-    val future: Future[Int] = Future { 2/ 0 } recover { case t: Throwable => 0 }
+    val future: Future[Int] = Future { 2 / 0 } recover { case t: Throwable ⇒ 0 }
     future.onComplete {
-      case Success(n) => n shouldBe 0
-      case Failure(t) => fail(t)
+      case Success(n) ⇒ n shouldBe 0
+      case Failure(t) ⇒ fail(t)
     }
     Await.ready(future, 1.minute)
     Thread.sleep(100)
   }
 
   "Future composition" should "map the result of the future with a new calculation" in {
-    val future: Future[Int] = Future { 2 }.map(_*2) recover { case t: Throwable => 0 }
+    val future: Future[Int] = Future { 2 }.map(_ * 2) recover { case t: Throwable ⇒ 0 }
     future.futureValue shouldBe 4
   }
 
   "Future composition can fail" should "should still recover with default value" in {
-    val future: Future[Int] = Future { 2 }.map(_ / 0) recover { case t: Throwable => 0 }
+    val future: Future[Int] = Future { 2 }.map(_ / 0) recover { case t: Throwable ⇒ 0 }
     future.futureValue shouldBe 0
   }
 
@@ -140,7 +156,7 @@ class FuturesTest extends TestSpec {
 
     // to return a Future[Int], we must destroy (flatten) the container 'f1', so
     // we have the value 2, make the calculation and return a Future
-    val f3: Future[Int] = f1 flatMap { n => f2.map { _ * n } }
+    val f3: Future[Int] = f1 flatMap { n ⇒ f2.map { _ * n } }
     f3.futureValue shouldBe 8
   }
 
@@ -149,19 +165,19 @@ class FuturesTest extends TestSpec {
     val f2: Future[Int] = Future { 4 }
 
     val f3: Future[Int] = for {
-      n1 <- f1 // take the value n1 out of container f1
-      n2 <- f2 // take the value n2 out of container f2
+      n1 ← f1 // take the value n1 out of container f1
+      n2 ← f2 // take the value n2 out of container f2
     } yield n1 * n2
-   // do the processing and return container f3
+    // do the processing and return container f3
 
     f3.futureValue shouldBe 8
   }
 
   "Future with side effects" should "leave the result alone" in {
     val f1 = Future { 1 }
-      .andThen { case Success(n: Int) => n * 2 }
-      .andThen { case Success(n: Int) => n * 2 }
-      .andThen { case Success(n: Int) => n * 2 }
+      .andThen { case Success(n: Int) ⇒ n * 2 }
+      .andThen { case Success(n: Int) ⇒ n * 2 }
+      .andThen { case Success(n: Int) ⇒ n * 2 }
 
     f1.futureValue shouldBe 1
   }

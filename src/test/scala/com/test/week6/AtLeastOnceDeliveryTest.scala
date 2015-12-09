@@ -1,8 +1,24 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week6
 
-import akka.actor.{PoisonPill, Props, ActorPath}
+import akka.actor.{ PoisonPill, Props, ActorPath }
 import akka.event.LoggingReceive
-import akka.persistence.{AtLeastOnceDelivery, PersistentActor}
+import akka.persistence.{ AtLeastOnceDelivery, PersistentActor }
 import com.test.TestSpec
 import akka.pattern.ask
 
@@ -47,7 +63,6 @@ class AtLeastOnceDeliveryTest extends TestSpec {
   case object NrPosted
   case class NrPostedResponse(posted: Long)
 
-
   // The userActor will instruct the publisher to publish a post,
   // but the publisher will only do so, when it receives the PublishPost command
 
@@ -55,19 +70,19 @@ class AtLeastOnceDeliveryTest extends TestSpec {
     override def persistenceId: String = "userActor"
 
     override def receiveCommand: Receive = LoggingReceive {
-      case NewPost(text, id) =>
-        persist(PostCreated(text)) { e =>
+      case NewPost(text, id) ⇒
+        persist(PostCreated(text)) { e ⇒
           deliver(subscriber)(PublishPost(text, _))
           sender() ! BlogPosted(id)
         }
-      case PostPublished(id) =>
+      case PostPublished(id) ⇒
         confirmDelivery(id)
-        persist(PostPublished(id))(_ => ())
+        persist(PostPublished(id))(_ ⇒ ())
     }
 
     override def receiveRecover: Receive = LoggingReceive {
-      case PostCreated(text) => deliver(subscriber)(PublishPost(text, _))
-      case PostPublished(id) => confirmDelivery(id)
+      case PostCreated(text) ⇒ deliver(subscriber)(PublishPost(text, _))
+      case PostPublished(id) ⇒ confirmDelivery(id)
     }
   }
 
@@ -79,28 +94,28 @@ class AtLeastOnceDeliveryTest extends TestSpec {
     var nrPosted = 0L
 
     override def receiveRecover: Receive = LoggingReceive {
-      case PostPublished(id) =>
+      case PostPublished(id) ⇒
         expectedId = id + 1
         nrPosted += 1
     }
 
     override def receiveCommand: Receive = LoggingReceive {
-      case PublishPost(text, id) if id > expectedId =>
-        // ignore the message, the sender will retry
+      case PublishPost(text, id) if id > expectedId ⇒
+      // ignore the message, the sender will retry
 
-      case PublishPost(text, id) if id < expectedId =>
+      case PublishPost(text, id) if id < expectedId ⇒
         // already received, just confirm
         sender() ! PostPublished(id)
 
-      case PublishPost(text, id) if id == expectedId =>
-        persist(PostPublished(id)) { e =>
+      case PublishPost(text, id) if id == expectedId ⇒
+        persist(PostPublished(id)) { e ⇒
           sender() ! e
           // modify the website
           nrPosted += 1
           expectedId += 1
         }
 
-      case NrPosted => sender() ! NrPostedResponse(nrPosted)
+      case NrPosted ⇒ sender() ! NrPostedResponse(nrPosted)
     }
   }
 

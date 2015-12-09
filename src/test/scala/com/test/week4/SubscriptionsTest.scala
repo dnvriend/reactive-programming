@@ -1,8 +1,24 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week4
 
 import com.test.TestSpec
 import rx.lang.scala._
-import rx.lang.scala.subscriptions.{SerialSubscription, MultipleAssignmentSubscription, CompositeSubscription}
+import rx.lang.scala.subscriptions.{ SerialSubscription, MultipleAssignmentSubscription, CompositeSubscription }
 import scala.concurrent.duration._
 
 class SubscriptionsTest extends TestSpec {
@@ -13,10 +29,10 @@ class SubscriptionsTest extends TestSpec {
     s1 should not be 'unsubscribed
     s2 should not be 'unsubscribed
     s1.unsubscribe()
-    s1 should be ('unsubscribed)
+    s1 should be('unsubscribed)
     s2 should not be 'unsubscribed
     s2.unsubscribe()
-    s2 should be ('unsubscribed)
+    s2 should be('unsubscribed)
 
     // s1 and s2 are both 'cold' observables,
     // because they each have their own private
@@ -33,7 +49,7 @@ class SubscriptionsTest extends TestSpec {
     }
     s1 should not be 'unsubscribed
     s1.unsubscribe()
-    s1 should be ('unsubscribed)
+    s1 should be('unsubscribed)
     s1.unsubscribe()
     counter shouldBe 1
   }
@@ -47,8 +63,8 @@ class SubscriptionsTest extends TestSpec {
     s2 should not be 'unsubscribed
     composite should not be 'unsubscribed
     composite.unsubscribe()
-    s1 should be ('unsubscribed)
-    s2 should be ('unsubscribed)
+    s1 should be('unsubscribed)
+    s2 should be('unsubscribed)
   }
 
   "MultipleAssignmentSubscription" should "unsubscribe" in {
@@ -64,17 +80,17 @@ class SubscriptionsTest extends TestSpec {
     multi.subscription = s1
     // unsubscribe multi
     multi.unsubscribe()
-    multi should be ('unsubscribed)
-    s1 should be ('unsubscribed)
+    multi should be('unsubscribed)
+    s1 should be('unsubscribed)
     s2 should not be 'unsubscribed
 
     // so multi is unsubscribed.. now set the underlying
     // subscription of multi to s2, which is still subscribed,
     // see what happens
     multi.subscription = s2
-    multi should be ('unsubscribed)
-    s1 should be ('unsubscribed)
-    s2 should be ('unsubscribed)
+    multi should be('unsubscribed)
+    s1 should be('unsubscribed)
+    s2 should be('unsubscribed)
   }
 
   "SerialSubscription" should "unsubscribe" in {
@@ -91,7 +107,7 @@ class SubscriptionsTest extends TestSpec {
     s2 should not be 'unsubscribed
     serial.subscription = s2
     serial should not be 'unsubscribed
-    s1 should be ('unsubscribed)
+    s1 should be('unsubscribed)
     s2 should not be 'unsubscribed
   }
 }

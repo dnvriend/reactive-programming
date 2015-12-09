@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week2
 
 import com.test.TestSpec
@@ -11,7 +27,7 @@ class StreamsTest extends TestSpec {
 
   "A List" should "evaluate all entries on head" in {
     var numTimes = 0
-    val x = List(1, 2, 3).map { i =>
+    val x = List(1, 2, 3).map { i ⇒
       numTimes += 1
       i * 2
     }.head // only get the head, so one evaluation would be enough, but ...
@@ -21,7 +37,7 @@ class StreamsTest extends TestSpec {
 
   it should "still evaluate all entries on take 2" in {
     var numTimes = 0
-    val x = List(1, 2, 3).map { i =>
+    val x = List(1, 2, 3).map { i ⇒
       numTimes += 1
       i * 2
     }.take(2) // only get the first 2 elements, so two evaluations would be enough, but ...
@@ -38,7 +54,7 @@ class StreamsTest extends TestSpec {
   it should "filter the list" in {
     var num = 0
     val xs = List(3, 1, 2, 1, 4)
-    val x = xs.filter { e =>
+    val x = xs.filter { e ⇒
       num += 1
       e < 2
     }.take(2)
@@ -54,7 +70,7 @@ class StreamsTest extends TestSpec {
 
   "A Stream" should "not evaluate all entries on head" in {
     var numTimes = 0
-    val x = Stream(1, 2, 3).map { i =>
+    val x = Stream(1, 2, 3).map { i ⇒
       numTimes += 1
       i * 2
     }.head // only get the head, so one evaluation would be enough,
@@ -64,7 +80,7 @@ class StreamsTest extends TestSpec {
 
   it should "not evaluate all entries on take 2" in {
     var numTimes = 0
-    val x = Stream(1, 2, 3).map { i =>
+    val x = Stream(1, 2, 3).map { i ⇒
       numTimes += 1
       i * 2
     }.take(2) // only get the first two elements, so two evaluations would be enough,
@@ -75,13 +91,13 @@ class StreamsTest extends TestSpec {
   it should "be created using '#::' and filter" in {
     var num = 0
     val xs: Stream[Int] = 3 #:: 1 #:: 2 #:: 1 #:: 4 #:: Stream.empty
-    val x = xs.filter { e =>
+    val x = xs.filter { e ⇒
       num += 1
       e < 2
     }.take(2)
     x shouldBe Stream(1, 1)
     num shouldBe 4 // it skips the first element (3), not < 2,
-                   // then takes the second (1), skips the third (2)
-                   // and takes the fourth (1), it will not evaluate (4)
+    // then takes the second (1), skips the third (2)
+    // and takes the fourth (1), it will not evaluate (4)
   }
 }

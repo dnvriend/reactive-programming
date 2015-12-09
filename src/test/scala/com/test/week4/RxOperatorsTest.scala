@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week4
 
 import com.test.TestSpec
@@ -43,7 +59,7 @@ class RxOperatorsTest extends TestSpec {
 
   "Observer that emits numbers" should "emit the number 0" in {
     val observable =
-        observableThatEmitsNumbers
+      observableThatEmitsNumbers
         // the observable will take 2 items from the stream
         // then it will automatically unsubscribe
         .take(2)
@@ -74,14 +90,14 @@ class RxOperatorsTest extends TestSpec {
     observableThatEmitsNumbers
       .drop(3)
       .take(2)
-      .map(n => "number: " + n)
+      .map(n ⇒ "number: " + n)
       .toBlocking
       .toList shouldBe List("number: 3", "number: 4")
   }
 
   it should "merge two streams" in {
     val o1 = observableThatEmitsNumbers.drop(3).take(3) // 3, 4, 5
-    val o2 = observableThatEmitsNumbers.take(3)         // 0, 1, 2
+    val o2 = observableThatEmitsNumbers.take(3) // 0, 1, 2
     o1.merge(o2)
       .take(6)
       .toBlocking
@@ -118,18 +134,18 @@ class RxOperatorsTest extends TestSpec {
   }
 
   "Observables" should "be used as follows" in {
-    observableThatEmitsNumbers              // emit numbers
-       .slidingBuffer(count = 2, skip = 1)  // buffer 2 elements, skip 1, so (0, 1), (1, 2), (2, 3) etc
-       .take(3)                             // take 2 pairs, then unsubscribe automatically
-       .toBlocking
-       .toList should contain inOrder (Seq(0, 1), Seq(1, 2))
+    observableThatEmitsNumbers // emit numbers
+      .slidingBuffer(count = 2, skip = 1) // buffer 2 elements, skip 1, so (0, 1), (1, 2), (2, 3) etc
+      .take(3) // take 2 pairs, then unsubscribe automatically
+      .toBlocking
+      .toList should contain inOrder (Seq(0, 1), Seq(1, 2))
   }
 
   it should "filter" in {
-    observableThatEmitsNumbers             // emit numbers
-      .filter(_ % 2 == 0)                  // only emit elements that are even numbers
-      .slidingBuffer(count = 2, skip = 2)  // buffer 2 elements and skip 2 (0, 2), (4, 6) etc
-      .take(2)                             // take 2 pairs
+    observableThatEmitsNumbers // emit numbers
+      .filter(_ % 2 == 0) // only emit elements that are even numbers
+      .slidingBuffer(count = 2, skip = 2) // buffer 2 elements and skip 2 (0, 2), (4, 6) etc
+      .take(2) // take 2 pairs
       .toBlocking
       .toList should contain inOrder (Seq(0, 2), Seq(4, 6))
   }
@@ -137,13 +153,13 @@ class RxOperatorsTest extends TestSpec {
   it should "flatMap" in {
     val o1 = observableThatEmitsNumbers.take(2)
     val o2 = observableThatEmitsNumbers.take(5)
-    o1.flatMap(_ => o2)
+    o1.flatMap(_ ⇒ o2)
       .toBlocking
       .toList should not be empty
 
-      // the content of the resulting list is non-deterministic.
-      // this is because, in contrary to iterables, observables are asynchronous
-      // the function you are flat-mapping over will produce its values asynchronously
+    // the content of the resulting list is non-deterministic.
+    // this is because, in contrary to iterables, observables are asynchronous
+    // the function you are flat-mapping over will produce its values asynchronously
   }
 
   it should "merge" in {
@@ -191,19 +207,19 @@ class RxOperatorsTest extends TestSpec {
   "flattening nested streams" should "return the correct sequence" in {
     val xs: Observable[Int] = Observable.from(List(3, 2, 1))
     val yss: Observable[Observable[Int]] =
-      xs.map(x => Observable.interval(x seconds).map(_ => x).take(2))
+      xs.map(x ⇒ Observable.interval(x seconds).map(_ ⇒ x).take(2))
     val zs: Observable[Int] = yss.flatten
 
     zs.toBlocking.toList match {
-      case List(1, 1, 2, 3, 2, 3) =>
-      case List(1, 2, 1, 3, 2, 3) =>
-      case u => fail("Unexpected: " + u)
+      case List(1, 1, 2, 3, 2, 3) ⇒
+      case List(1, 2, 1, 3, 2, 3) ⇒
+      case u                      ⇒ fail("Unexpected: " + u)
     }
   }
 
   "Concatenating nested streams" should "return the correct sequence" in {
     Observable.from(List(3, 2, 1))
-      .map(x => Observable.interval(x seconds).map(_ => x).take(2))
+      .map(x ⇒ Observable.interval(x seconds).map(_ ⇒ x).take(2))
       .concat
       .toBlocking
       .toList shouldBe List(3, 3, 2, 2, 1, 1)

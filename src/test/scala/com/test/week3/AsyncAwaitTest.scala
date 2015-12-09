@@ -1,10 +1,26 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week3
 
 import com.test.TestSpec
 
 import scala.async.Async._
 import scala.concurrent.Future
-import scala.util.{Failure, Try}
+import scala.util.{ Failure, Try }
 
 class AsyncAwaitTest extends TestSpec {
 
@@ -64,20 +80,20 @@ class AsyncAwaitTest extends TestSpec {
   //
 
   implicit class HipsterFuture[T](f: Future[T]) {
-    def fallbackTo(that: => Future[T]): Future[T] = {
+    def fallbackTo(that: ⇒ Future[T]): Future[T] = {
       f.recoverWith {
-        case _ => that recoverWith {
-          case _ => f
+        case _ ⇒ that recoverWith {
+          case _ ⇒ f
         }
       }
     }
 
     // imperative..
-    def retry(noTimes: Int, block: => Future[T]): Future[T] = async {
+    def retry(noTimes: Int, block: ⇒ Future[T]): Future[T] = async {
       var i = 0
       var result: Try[T] = Failure(new Exception("_"))
-      while(result.isFailure && i < noTimes) {
-        result = await (block)
+      while (result.isFailure && i < noTimes) {
+        result = await(block)
         i += 1
       }
       result.get
@@ -88,12 +104,12 @@ class AsyncAwaitTest extends TestSpec {
 
     // retries the future num times, then retries 'that'
     // num times (seems more interesting to me)
-    def retryWith(noTimes: Int)(that: => Future[T]): Future[T] = {
+    def retryWith(noTimes: Int)(that: ⇒ Future[T]): Future[T] = {
       retry(noTimes, f).fallbackTo(retry(noTimes, that))
     }
 
-    def filter(p: T => Boolean): Future[T] = async {
-      val x = await (f)
+    def filter(p: T ⇒ Boolean): Future[T] = async {
+      val x = await(f)
       if (!p(x)) throw new NoSuchElementException else x
     }
   }

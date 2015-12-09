@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week1
 
 import com.test.TestSpec
@@ -9,28 +25,28 @@ class PatternMatchTest extends TestSpec {
   // most importantly, the match 'expression' returns a value, in this case it is
   // a function from (Int => String) and thus returns a String
   def matchNumber(x: Int): String = x match {
-    case 1 => "one"
-    case 2 => "two"
-    case _ => "many"
+    case 1 ⇒ "one"
+    case 2 ⇒ "two"
+    case _ ⇒ "many"
   }
 
   // this is a function from (Any => Any),
   // so it accepts Any, and returns Any
   def matchAny(x: Any): Any = x match {
-    case 1 => "one"
-    case "two" => 2
-    case y: Int => "scala.Int"
-    case couldBeAnyting => couldBeAnyting
+    case 1              ⇒ "one"
+    case "two"          ⇒ 2
+    case y: Int         ⇒ "scala.Int"
+    case couldBeAnyting ⇒ couldBeAnyting
   }
 
   // it is also possible to set guards
   // on the matches
   def bigger(x: Any): Any = x match {
-    case i: Int if i < 0 => i - 1
-    case i: Int => i + 1
-    case d: Double if d < 0.0 => d - 0.1
-    case d: Double => d + 0.1
-    case text: String => text + "s"
+    case i: Int if i < 0      ⇒ i - 1
+    case i: Int               ⇒ i + 1
+    case d: Double if d < 0.0 ⇒ d - 0.1
+    case d: Double            ⇒ d + 0.1
+    case text: String         ⇒ text + "s"
   }
 
   "matchNumber" should "match numbers" in {

@@ -1,6 +1,22 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week6
 
-import akka.actor.{PoisonPill, Props}
+import akka.actor.{ PoisonPill, Props }
 import akka.event.LoggingReceive
 import akka.pattern.ask
 import akka.persistence.PersistentActor
@@ -18,8 +34,8 @@ class BlogPostTest extends TestSpec {
 
   case class State(posts: Vector[String], disabled: Boolean) {
     def update(event: Event): State = event match {
-      case PostCreated(text) => copy(posts = posts :+ text)
-      case QuotaReached => copy(disabled = true)
+      case PostCreated(text) ⇒ copy(posts = posts :+ text)
+      case QuotaReached      ⇒ copy(disabled = true)
     }
   }
 
@@ -35,15 +51,15 @@ class BlogPostTest extends TestSpec {
     }
 
     override def receiveRecover: Receive = LoggingReceive {
-      case event: Event => updateState(event)
+      case event: Event ⇒ updateState(event)
     }
 
     override def receiveCommand: Receive = LoggingReceive {
-      case NewPost(_, id) if state.disabled =>
+      case NewPost(_, id) if state.disabled ⇒
         sender() ! BlogNotPosted(id, "quota reached")
 
-      case NewPost(text, id) if !state.disabled =>
-        persist(PostCreated(text)) { event =>
+      case NewPost(text, id) if !state.disabled ⇒
+        persist(PostCreated(text)) { event ⇒
           updateState(event)
           sender ! BlogPosted(id) // confirm
         }
@@ -63,19 +79,19 @@ class BlogPostTest extends TestSpec {
     }
 
     override def receiveRecover: Receive = LoggingReceive {
-      case event: Event => updateState(event)
+      case event: Event ⇒ updateState(event)
     }
 
     override def receiveCommand: Receive = LoggingReceive {
-      case NewPost(_, id) if state.disabled =>
+      case NewPost(_, id) if state.disabled ⇒
         sender() ! BlogNotPosted(id, "quota reached")
 
-      case NewPost(text, id) if !state.disabled =>
+      case NewPost(text, id) if !state.disabled ⇒
         val created = PostCreated(text)
         updateState(created)
         updateState(QuotaReached)
-        persistAsync(created)(_ => sender() ! BlogPosted(id))
-        persistAsync(QuotaReached)(_ => ())
+        persistAsync(created)(_ ⇒ sender() ! BlogPosted(id))
+        persistAsync(QuotaReached)(_ ⇒ ())
         persist(QuotaReached)(updateState)
     }
   }
@@ -96,9 +112,9 @@ class BlogPostTest extends TestSpec {
     var user1 = createUser(1)
     // because of async processing of events, the responses can be out of order
     val possilbleResponses: PartialFunction[Any, Unit] = {
-      case BlogPosted(1) =>
-      case BlogNotPosted(1, "quota reached") =>
-      case BlogNotPosted(2, "quota reached") =>
+      case BlogPosted(1)                     ⇒
+      case BlogNotPosted(1, "quota reached") ⇒
+      case BlogNotPosted(2, "quota reached") ⇒
     }
     (user1 ? NewPost("foo", 1)).futureValue mustBe possilbleResponses
     (user1 ? NewPost("bar", 2)).futureValue mustBe possilbleResponses

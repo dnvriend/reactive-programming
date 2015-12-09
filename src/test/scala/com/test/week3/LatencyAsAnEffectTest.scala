@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week3
 
 import com.test.TestSpec
@@ -62,8 +78,9 @@ class LatencyAsAnEffectTest extends TestSpec {
     val packet = readFromMemory.futureValue
     val result: Future[Array[Byte]] =
       sendToEurope(packet, failed = true)
-        .recoverWith { case t: Throwable =>
-          sendToUsa(packet, failed = false)
+        .recoverWith {
+          case t: Throwable ⇒
+            sendToUsa(packet, failed = false)
         }
 
     result.toTry should be a 'success
@@ -87,10 +104,10 @@ class LatencyAsAnEffectTest extends TestSpec {
 
     // When the future 'f' fails, it will execute future 'that',
     // and it 'that' fails, it will return the failed future 'f'
-    def fallbackTo(that: => Future[T]): Future[T] = {
+    def fallbackTo(that: ⇒ Future[T]): Future[T] = {
       f.recoverWith {
-        case _ => that recoverWith {
-          case _ => f
+        case _ ⇒ that recoverWith {
+          case _ ⇒ f
         }
       }
     }
@@ -100,7 +117,7 @@ class LatencyAsAnEffectTest extends TestSpec {
     val packet = readFromMemory.futureValue
     val response: Future[Array[Byte]] = // the normal Future will be implicitly converted to HipsterFuture
       sendToEurope(packet, failed = true)
-      .fallbackTo(sendToUsa(packet, failed = true))
+        .fallbackTo(sendToUsa(packet, failed = true))
     // the fallBackTo combinator is quite nice. It factors
     // away all the ugly recoverWith code
     response.toTry should be a 'failure

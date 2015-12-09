@@ -1,7 +1,23 @@
+/*
+ * Copyright 2015 Dennis Vriend
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.test.week5
 
 import akka.actor.Status.Failure
-import akka.actor.{Actor, ActorRef, Props}
+import akka.actor.{ Actor, ActorRef, Props }
 import akka.event.LoggingReceive
 import akka.pattern.ask
 import com.test.TestSpec
@@ -11,7 +27,7 @@ class BankAccountTest extends TestSpec {
   "Actors" should "know itself" in {
     val ref: ActorRef = system.actorOf(Props(new Actor {
       override def receive: Receive = {
-        case _ => sender() ! self
+        case _ ⇒ sender() ! self
       }
     }))
 
@@ -22,7 +38,7 @@ class BankAccountTest extends TestSpec {
   it should "count" in {
     val ref: ActorRef = system.actorOf(Props(new Actor {
       def count(num: Int): Receive = LoggingReceive {
-        case _ =>
+        case _ ⇒
           context.become(count(num + 1))
           sender() ! num
       }
@@ -48,15 +64,15 @@ class BankAccountTest extends TestSpec {
       import BankAccount._
       var balance: BigInt = BigInt(0)
       override def receive: Receive = LoggingReceive {
-        case Deposit(amount) =>
+        case Deposit(amount) ⇒
           balance += amount
           sender() ! Done(balance)
-        case Withdraw(amount) =>
+        case Withdraw(amount) ⇒
           balance -= amount
           sender() ! Done(balance)
-        case Info =>
+        case Info ⇒
           sender() ! Done(balance)
-        case _ => sender() ! Failure
+        case _ ⇒ sender() ! Failure
       }
     }
 
@@ -70,20 +86,20 @@ class BankAccountTest extends TestSpec {
 
     val tom = system.actorOf(Props(new Actor {
       def awaitDeposit(client: ActorRef): Receive = LoggingReceive {
-        case Done(amount) =>
+        case Done(amount) ⇒
           client ! Done(amount)
           context.stop(self)
       }
       def awaitWithdraw(to: ActorRef, amount: BigInt, client: ActorRef): Receive = LoggingReceive {
-        case Done(_) =>
+        case Done(_) ⇒
           to ! Deposit(amount)
           context.become(awaitDeposit(client))
-        case Failed =>
+        case Failed ⇒
           client ! Failed
           context.stop(self)
       }
       override def receive = {
-        case Transfer(from, to, amount) =>
+        case Transfer(from, to, amount) ⇒
           from ! Withdraw(amount)
           context.become(awaitWithdraw(to, amount, sender()))
       }
